@@ -1,0 +1,54 @@
+let base_URL = "https://bigbirdonline.herokuapp.com/user-posts/" + `${ localStorage.getItem('id') }`;
+
+// view product function
+function getPosts(url) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+  
+        // console.log(cartProduct);
+  
+        tweets = data.results;
+  
+        renderPosts(tweets);
+      });
+  }
+  
+  getPosts(base_URL);
+
+  function renderPosts(tweets) {
+      let container = document.querySelector('#timeline');
+
+      container.innerHTML = "";
+
+      let tweetID = tweets.tweetID;
+
+      console.log(tweetID)
+
+      tweets.forEach((tweet) => {
+          container.innerHTML += `<div class="tweet-container">
+          <div> Tweet ID ${ tweet.tweet_id } </div>
+          <div><p> ${ tweet.description } </p></div>
+          <div><img src="${ tweet.image }"class="image"></div>
+          <div><img src="${ tweet.image_two }" class="image"></div>
+          <div><img src="${ tweet.image_three }" class="image"></div>
+          <div><img src="${ tweet.image_four }" class="image"></div>
+          <button onclick="getComments(), event.preventDefault()"><i class="fas fa-comments"></i><button>
+          <div><p> ${ tweet.date } </p><div>
+          <hr></hr>
+          </div>`
+      });
+  }
+
+  function getComments() {
+      fetch('https://bigbirdonline.herokuapp.com/get-comments/' + "1" + "/post/" + "2" + "/comment/" + "1", {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).then(res => res.json()).then(data => {
+          console.log(data)
+          console.log("Successfull")
+      })
+  }
