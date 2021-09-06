@@ -29,11 +29,21 @@ function getPosts(url) {
       tweets.forEach((tweet) => {
           container.innerHTML += `<div class="tweet-container">
           <div> Tweet ID ${ tweet.tweet_id } </div>
-          <div><p> ${ tweet.description } </p></div>
-          <div><img src="${ tweet.image }"class="image"></div>
-          <div><img src="${ tweet.image_two }" class="image"></div>
-          <div><img src="${ tweet.image_three }" class="image"></div>
-          <div><img src="${ tweet.image_four }" class="image"></div>
+          ${
+            tweet.description ? `<div><p> ${ tweet.description } </p></div>` : ''
+        }
+        ${
+          tweet.image ? `<div><img src="${ tweet.image }"class="image"></div>` : ''
+        }
+        ${
+          tweet.image_two ? `<div><img src="${ tweet.image_two }"class="image"></div>` : ''
+        }
+        ${
+          tweet.image_three ? `<div><img src="${ tweet.image_three }"class="image"></div>` : ''
+        }
+        ${
+          tweet.image_four ? `<div><img src="${ tweet.image_four }"class="image"></div>` : ''
+        }
           <button onclick="getComments(), event.preventDefault()"><i class="fas fa-comments"></i><button>
           <div><p> ${ tweet.date } </p><div>
           <hr></hr>

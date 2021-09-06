@@ -23,7 +23,7 @@
 
 .tweet-container {
     min-height: 100vh;
-    width: 55vw;
+    width: 50vw;
     padding: 50px;
     display: flex;
     flex-direction: column;
