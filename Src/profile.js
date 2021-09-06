@@ -121,19 +121,23 @@ function userInfo() {
                 </div>
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="file" name="image" id="imageOne" class="imgurl">
+                    <input type="file" name="image" id="imageOne" onchange="addImage()">
+                    <img src="" alt="Image Preview" class="imgurl">
                 </div>
                 <div class="form-group">
                     <label for="image_two">Image</label>
-                    <input type="file" name="image_two" id="imageTwo" class="imgurl">
+                    <input type="file" name="image_two" id="imageTwo" onchange="addImageTwo()">
+                    <img src="" alt="Image Preview" class="imgurlTwo">
                 </div>
                 <div class="form-group">
                     <label for="image_three">Image</label>
-                    <input type="file" name="image_three" id="imageThree" class="imgurl">
+                    <input type="file" name="image_three" id="imageThree" onchange="addImageThree()">
+                    <img src="" alt="Image Preview" class="imgurlThree">
                 </div>
                 <div class="form-group">
                     <label for="image_four">Image</label>
-                    <input type="file" name="image_four" id="imageFour" class="imgurl">
+                    <input type="file" name="image_four" id="imageFour" onchange="addImageFour()">
+                    <img src="" alt="Image Preview" class="imgurlFour">
                 </div>
                 <button type="submit">Add Post</button>
                 </div>
@@ -277,12 +281,54 @@ function userInfo() {
     }
 }
 
+function addImageTwo() {
+  const preview = document.querySelector('.imgurlTwo');
+  const file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener("load", function () {
+      preview.src = reader.result;
+  }, false);
+
+  if (file) {
+      reader.readAsDataURL(file);
+  }
+}
+
+function addImageThree() {
+  const preview = document.querySelector('.imgurlThree');
+  const file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener("load", function () {
+      preview.src = reader.result;
+  }, false);
+
+  if (file) {
+      reader.readAsDataURL(file);
+  }
+}
+
+function addImageFour() {
+  const preview = document.querySelector('.imgurlFour');
+  const file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener("load", function () {
+      preview.src = reader.result;
+  }, false);
+
+  if (file) {
+      reader.readAsDataURL(file);
+  }
+}
+
 function addPost() {
   const postDescription = document.getElementById("userDescription").value;
-  const imageOne = document.getElementById("imageOne").value;
-  const imageTwo = document.getElementById("imageTwo").value;
-  const imageThree = document.getElementById("imageThree").value;
-  const imageFour = document.getElementById("imageFour").value;
+  const imageOne = document.querySelector(".imgurl").src;
+  const imageTwo = document.querySelector(".imgurlTwo").src;
+  const imageThree = document.querySelector(".imgurlThree").src;
+  const imageFour = document.querySelector(".imgurlFour").src;
 
   let post = {
     user_id: localStorage.getItem('id'),

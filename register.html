@@ -5,22 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <!-- <link rel="shortcut icon" href="./Images/LCA-Icon.png" type="image" /> -->
+    <link rel="shortcut icon" href="./Images/icon.ico" type="image" />
     <!-- font awesome plugin -->
     <script src="https://kit.fontawesome.com/3285114a98.js" crossorigin="anonymous"></script>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="./Styles/register.css">
 </head>
 <body>
-    <nav class="nav-bar">
-        <a href="./home.html">Home</a>
-        <a href="../home.html">Login</a>
-        <a href="../view-products.html">Products</a>
-    </nav>
     <form enctype="multipart/form-data"
     method="POST"
     id="register">
     <div class="register-container section">
         <div class="heading">
-            <!-- <img src="./Images/Lifechoices-300x91.jpg" alt="LCA Logo"> -->
+            <img src="./Images/icon.ico" alt="LCA Logo">
             <h1>Register Your Account</h1>
         </div>
         <div class="form-group">
@@ -41,7 +38,7 @@
         </div>
         <div class="form-group">
             <label for="id_num" class="header" class="form-label">Your ID Number</label>
-            <input type="text" name="id_num" id="id" required placeholder="0012250037081">
+            <input type="text" name="id_num" id="id" required placeholder="0012250037081" class="form-input">
         </div>
         <div class="form-group">
             <label for="password" class="header" class="form-label">Your Password</label>
@@ -49,15 +46,15 @@
         </div>
         <div class="form-group">
             <label for="profile_pic" class="header" class="form-label">Your Profile Picture</label>
-            <input type="file" name="profile_pic" id="pp" required>
+            <input type="file" name="profile_pic" id="pp" required class="form-input">
         </div>
         <div class="form-group">
             <label for="bio" class="header" class="form-label">Bio</label>
-            <textarea name="bio" id="bio-input" cols="30" rows="10" required placeholder="Your Bio for your profile"></textarea>
+            <textarea class="form-input" name="bio" id="bio-input" cols="30" rows="10" required placeholder="Your Bio for your profile"></textarea>
         </div>
         <div class="form-group">
             <label for="username" class="header" class="form-label">Username</label>
-            <input type="text" name="username" id="username" required placeholder="@getwrecked">
+            <input type="text" name="username" id="username" required placeholder="@getwrecked" class="form-input">
         </div>
         <button type="submit" class="button" onclick="registerUser(), event.preventDefault()">Register</button>
     </div>
@@ -67,11 +64,6 @@
             <div class="cc-icon">
                 <a href=""><i class="far fa-copyright"></i></a>
                 <p>Big Bird Online</p>
-            </div>
-            <div class="social-icon">
-                <a href="https://www.facebook.com/LifeChoicesZA" target="_blank"><i class="fab fa-facebook-square"></i></a>
-                <a href="https://www.instagram.com/lifechoicesza/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/school/lifechoices-coding-academy/" target="_blank"><i class="fab fa-linkedin" target="_blank"></i></a>
             </div>
         </div>
     </footer>

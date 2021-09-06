@@ -27,7 +27,8 @@ function getPosts(url) {
       console.log(tweetID)
 
       tweets.forEach((tweet) => {
-          container.innerHTML += `<div class="tweet-container">
+          container.innerHTML += `
+          <div class="tweet-container">
           <div> Tweet ID ${ tweet.tweet_id } </div>
           ${
             tweet.description ? `<div><p> ${ tweet.description } </p></div>` : ''

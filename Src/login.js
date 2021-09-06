@@ -29,7 +29,7 @@ fetch('https://bigbirdonline.herokuapp.com/auth', {
             console.log('Successful')
             console.log(userID)
             alert('You have successfully logged in')
-            window.location.href = "./profile.html"
+            window.location.href = "./timeline.html"
         }
     })
 }

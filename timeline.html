@@ -13,13 +13,73 @@
 <body>
     <div class="container">
         <div id="user-info">
-            <h1>USER DETAILS</h1>
+            <div class="timeline-image">
+                <img src="./Images/icon.ico" alt="">
+            </div>
+            <div class="nav-bar">
+                <a href=""><i class="far fa-user-circle"></i>  Profile</a>
+                <p><i class="fab fa-wpexplorer"></i>  Explore</p>
+                <p><i class="far fa-bell"></i>  Notifications</p>
+                <p><i class="far fa-envelope"></i>  Messages</p>
+                <p><i class="far fa-bookmark"></i>  Bookmarks</p>
+                <p><i class="far fa-list-alt"></i>  Lists</p>
+            </div>
+            <div class="tweet-btn">
+                <button id="logout"><i class="fas fa-sign-out-alt"></i></button>
+                <button><i class="fas fa-plus-circle"></i></button>
+            </div>
         </div>
-        <div id="timeline"></div>
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <h1>HOME</h1>
+            </div>
+            <div id="timeline"></div>
+        </div>
         <div id="search">
-            <h1>SEARCH BAR</h1>
+            <form>
+                <div class="form-group">
+                    <label for="search" class="header">Search</label>
+                    <input type="text" placeholder="Enter your search" class="form-input">
+                </div>
+                <button>SEARCH</button>
+            </form>
+            <div class="trending-card">
+                <div class="topics">
+                    <h2>Trends For You</h2>
+                    <p>Sports</p>
+                    <h4>PERCY TAU</h4>
+                    <p>20.1k tweets</p>
+                </div>
+                <div class="topics">
+                    <p>Trending in South Africa</p>
+                    <h4>BAFANA BAFANA</h4>
+                    <p>10.1k tweets</p>
+                </div>
+                <div class="topics">
+                    <p>Comedy TV</p>
+                    <h4>RICK & MORTY</h4>
+                    <p>26.2k tweets</p>
+                </div>
+                <div class="topics">
+                    <p>Trending in the UK</p>
+                    <h4>IDRIS ALBA</h4>
+                    <p>50.5k tweets</p>
+                </div>
+            </div>
+            <div class="follow-users">
+                <h1>Users to follow</h1>
+            </div>
         </div>
-        <script src="./Src/timeline.js"></script>
     </div>
+    <footer class="footer">
+        <div class="cc-container">
+            <div class="cc-icon">
+                <a href=""><i class="far fa-copyright"></i></a>
+                <p>Big Bird Online</p>
+            </div>
+        </div>
+    </footer>
+    <script src="./Src/timeline.js"></script>
+    <script src="./Src/logout.js"></script>
 </body>
 </html>
