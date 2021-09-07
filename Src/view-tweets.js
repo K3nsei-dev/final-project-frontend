@@ -61,23 +61,19 @@ function getPosts(url) {
                   </div>
                   <div class="form-group">
                       <label for="image">Image</label>
-                      <input type="file" name="image" id="imageOne-${ tweet.tweet_id }" onchange="addImage()">
-                       <img src="" alt="Image Preview" class="imgurl" height="200">
+                      <input type="file" name="image" id="imageOne-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
                   </div>
                   <div class="form-group">
                       <label for="image_two">Image</label>
-                      <input type="file" name="image_two" id="imageTwo-${ tweet.tweet_id }" onchange="addImageTwo()">
-                      <img src="" alt="Image Preview" class="imgurl-two" height="200">
+                      <input type="file" name="image_two" id="imageTwo-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
                   </div>
                   <div class="form-group">
                       <label for="image_three">Image</label>
-                      <input type="file" name="image_three" id="imageThree-${ tweet.tweet_id }" onchange="addImageThree()">
-                       <img src="" alt="Image Preview" class="imgurl-three" height="200">
+                      <input type="file" name="image_three" id="imageThree-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
                   </div>
                   <div class="form-group">
                       <label for="image_four">Image</label>
-                      <input type="file" name="image_four" id="imageFour-${ tweet.tweet_id }" onchange="addImageFour()">
-                       <img src="" alt="Image Preview" class="imgurl-four" height="200">
+                      <input type="file" name="image_four" id="imageFour-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
                   </div>
                   <button type="submit" id="editBtn-${ tweet.tweet_id }">EDIT</button>
               </form>
@@ -116,10 +112,10 @@ function getPosts(url) {
 
   function editPost(tweet_id) {
       const postDescription = document.getElementById(`userDescription-${ tweet_id }`).value;
-      const imageOne = document.querySelector(".imgurl").src;
-      const imageTwo = document.querySelector(".imgurl-two").src;
-      const imageThree = document.querySelector(".imgurl-three").src;
-      const imageFour = document.querySelector(".imgurl-four").src;
+      const imageOne = document.querySelector(`#imageOne-${ tweet_id }`).src;
+      const imageTwo = document.querySelector(`#imageTwo-${ tweet_id }`).src;
+      const imageThree = document.querySelector(`#imageThree-${ tweet_id }`).src;
+      const imageFour = document.querySelector(`#imageFour-${ tweet_id }`).src;
 
        post = {
         tweet_id: tweet_id,
@@ -155,62 +151,6 @@ function getPosts(url) {
           }
       })
   }
-
-  function addImage() {
-    const preview = document.querySelector('.imgurl');
-    const file = document.querySelector('input[type=file]').files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener("load", function () {
-        preview.src = reader.result;
-    }, false);
-
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-}
-
-function addImageTwo() {
-  const preview = document.querySelector('.imgurl-two');
-  const file = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-
-  reader.addEventListener("load", function () {
-      preview.src = reader.result;
-  }, false);
-
-  if (file) {
-      reader.readAsDataURL(file);
-  }
-}
-
-function addImageThree() {
-  const preview = document.querySelector('.imgurl-three');
-  const file = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-
-  reader.addEventListener("load", function () {
-      preview.src = reader.result;
-  }, false);
-
-  if (file) {
-      reader.readAsDataURL(file);
-  }
-}
-
-function addImageFour() {
-  const preview = document.querySelector('.imgurl-four');
-  const file = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-
-  reader.addEventListener("load", function () {
-      preview.src = reader.result;
-  }, false);
-
-  if (file) {
-      reader.readAsDataURL(file);
-  }
-}
 
 function deletePost(tweet_id) {
     let confirmed = confirm("Do you want to delete this post?")

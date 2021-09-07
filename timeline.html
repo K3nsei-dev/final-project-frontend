@@ -17,7 +17,7 @@
                 <img src="./Images/icon.ico" alt="">
             </div>
             <div class="nav-bar">
-                <a href=""><i class="far fa-user-circle"></i>  Profile</a>
+                <a href="./profile.html"><i class="far fa-user-circle"></i>  Profile</a>
                 <p><i class="fab fa-wpexplorer"></i>  Explore</p>
                 <p><i class="far fa-bell"></i>  Notifications</p>
                 <p><i class="far fa-envelope"></i>  Messages</p>
@@ -36,7 +36,7 @@
             <div id="timeline"></div>
         </div>
         <div id="search">
-            <form>
+            <form class="form-container">
                 <div class="form-group">
                     <label for="search" class="header">Search</label>
                     <input type="text" placeholder="Enter your search" class="form-input">
@@ -44,8 +44,10 @@
                 <button>SEARCH</button>
             </form>
             <div class="trending-card">
-                <div class="topics">
+                <div class="trending-header">
                     <h2>Trends For You</h2>
+                </div>
+                <div class="topics">
                     <p>Sports</p>
                     <h4>PERCY TAU</h4>
                     <p>20.1k tweets</p>
@@ -66,8 +68,9 @@
                     <p>50.5k tweets</p>
                 </div>
             </div>
-            <div class="follow-users">
+            <div class="follow-container">
                 <h1>Users to follow</h1>
+                <div id="follow-users"></div>
             </div>
         </div>
     </div>
@@ -77,9 +80,11 @@
                 <a href=""><i class="far fa-copyright"></i></a>
                 <p>Big Bird Online</p>
             </div>
+            <!-- <img src="./Images/icon.ico" alt=""> -->
         </div>
     </footer>
     <script src="./Src/timeline.js"></script>
     <script src="./Src/logout.js"></script>
+    <script src="./Src/follow.js"></script>
 </body>
 </html>

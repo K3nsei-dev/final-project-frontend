@@ -41,6 +41,18 @@ function userInfo() {
   
         let users = data.results;
 
+        let following = data.results.following
+
+        let newFollowing = following.split(",")
+
+        let followers = data.results.follower
+
+        // let newFollower = followers.split(',')
+
+        // newFollowing.length
+
+        // console.log(newFollowing.length)
+
         // let following = users.following;
 
         // following.split()
@@ -60,8 +72,12 @@ function userInfo() {
         <div class="firstName"><h3>First Name:</h3> ${users.first_name}</div>
         <div class="lastName"><h3>Last Name:</h3> ${users.last_name}</div>
         <div><h3>Bio</h3> ${ users.bio }</div>
-        <div><h3>Following</h3> ${ users.following }</div>
-        <div><h3>Followers</h3> ${ users.followers }</div>
+        ${
+          (newFollowing.length == 0) ? `<div><h3>Following</h3>0</div>` : `<div><h3>Following</h3> ${ newFollowing.length }</div>`
+        }
+        ${
+          (users.follower === 'null') ? `<div><h3>Followers</h3> ${ users.follower }</div>` : `<div><h3>Followers</h3>0</div>`
+        }
         <button id="userBtn" id="profileSettings" onclick="editUserModal()">Edit Profile</button>
         <button onclick="deleteUser()">Delete Profile</button>
         <button id="addBtn" onclick="addPostModal()">Add Post</button>
@@ -95,7 +111,8 @@ function userInfo() {
                </div>
                <div class="form-group">
                    <label for="profile_pic">Profile Picture</label>
-                   <input type="file" class="form-input imgurl" name="profile_pic" id="pp">
+                   <input type="file" class="form-input imgurl" name="profile_pic" id="pp" onchange="addImagePP()">
+                   <img src="" alt="Image Preview" class="ppURL">
                </div>
                <div class="form-group">
                    <label for="bio">Bio</label>
@@ -109,40 +126,9 @@ function userInfo() {
             </form>
         </div>
         </div>
-        <!-- The Modal -->
-        <div id="addModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close"></span>
-            <form onsubmit="event.preventDefault(), addImage(), addPost()">
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="userDescription" placeholder="Write your bio here">
-                </div>
-                <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="file" name="image" id="imageOne" onchange="addImage()">
-                    <img src="" alt="Image Preview" class="imgurl">
-                </div>
-                <div class="form-group">
-                    <label for="image_two">Image</label>
-                    <input type="file" name="image_two" id="imageTwo" onchange="addImageTwo()">
-                    <img src="" alt="Image Preview" class="imgurlTwo">
-                </div>
-                <div class="form-group">
-                    <label for="image_three">Image</label>
-                    <input type="file" name="image_three" id="imageThree" onchange="addImageThree()">
-                    <img src="" alt="Image Preview" class="imgurlThree">
-                </div>
-                <div class="form-group">
-                    <label for="image_four">Image</label>
-                    <input type="file" name="image_four" id="imageFour" onchange="addImageFour()">
-                    <img src="" alt="Image Preview" class="imgurlFour">
-                </div>
-                <button type="submit">Add Post</button>
-                </div>
     </div>
         `;
+        // document.querySelectorAll('.imginput').forEach(input => input.addEventListener('change', addImage))
       });
   }
 
@@ -234,7 +220,7 @@ function userInfo() {
     const userEmail =document.getElementById('userEmail').value;
     const number = document.getElementById('number').value;
     const userPass = document.getElementById('userPass').value;
-    const pp = document.getElementById('pp').value;
+    const pp = document.querySelector('.ppURL').src;
     const userBio = document.getElementById('bio').value;
     const userUsername = document.getElementById('userUsername').value;
 
@@ -267,68 +253,12 @@ function userInfo() {
     })
   }
 
-  function addImage() {
-    const preview = document.querySelector('.imgurl');
-    const file = document.querySelector('input[type=file]').files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener("load", function () {
-        preview.src = reader.result;
-    }, false);
-
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-}
-
-function addImageTwo() {
-  const preview = document.querySelector('.imgurlTwo');
-  const file = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-
-  reader.addEventListener("load", function () {
-      preview.src = reader.result;
-  }, false);
-
-  if (file) {
-      reader.readAsDataURL(file);
-  }
-}
-
-function addImageThree() {
-  const preview = document.querySelector('.imgurlThree');
-  const file = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-
-  reader.addEventListener("load", function () {
-      preview.src = reader.result;
-  }, false);
-
-  if (file) {
-      reader.readAsDataURL(file);
-  }
-}
-
-function addImageFour() {
-  const preview = document.querySelector('.imgurlFour');
-  const file = document.querySelector('input[type=file]').files[0];
-  const reader = new FileReader();
-
-  reader.addEventListener("load", function () {
-      preview.src = reader.result;
-  }, false);
-
-  if (file) {
-      reader.readAsDataURL(file);
-  }
-}
-
 function addPost() {
   const postDescription = document.getElementById("userDescription").value;
-  const imageOne = document.querySelector(".imgurl").src;
-  const imageTwo = document.querySelector(".imgurlTwo").src;
-  const imageThree = document.querySelector(".imgurlThree").src;
-  const imageFour = document.querySelector(".imgurlFour").src;
+  const imageOne = document.querySelector('.imgurl1').src;
+  const imageTwo = document.querySelector('.imgurl2').src;
+  const imageThree = document.querySelector('.imgurl3').src;
+  const imageFour = document.querySelector('.imgurl4').src;
 
   let post = {
     user_id: localStorage.getItem('id'),
@@ -339,7 +269,7 @@ function addPost() {
     image_four: imageFour
 }
 
-  console.log(post)
+  console.log(post, imageOne)
 
   fetch('https://bigbirdonline.herokuapp.com/add-post/' + `${localStorage.getItem('id')}`, {
       method: "POST",
@@ -363,4 +293,25 @@ function addPost() {
           window.location.reload()
       }
   })
+}
+
+function addImage(option) {
+  // console.log(1)
+  // let option = e.target.id[4]
+  const preview = document.querySelector('img');
+  const file = document.querySelector(`#image${option}`).files[0];
+  console.log(file)
+  console.log(preview)
+
+  const reader = new FileReader();
+
+  // console.log(preview, file)
+
+  reader.addEventListener("load", function () {
+      preview.src = reader.result;
+  }, false);
+
+  if (file) {
+      reader.readAsDataURL(file);
+  }
 }

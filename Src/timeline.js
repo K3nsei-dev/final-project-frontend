@@ -45,9 +45,8 @@ function getPosts(url) {
         ${
           tweet.image_four ? `<div><img src="${ tweet.image_four }"class="image"></div>` : ''
         }
-          <button onclick="getComments(), event.preventDefault()"><i class="fas fa-comments"></i><button>
-          <div><p> ${ tweet.date } </p><div>
-          <hr></hr>
+        <div><p> ${ tweet.date } </p><div>
+          <button onclick="getComments(), event.preventDefault()"><i class="fas fa-comments"></i></button>
           </div>`
       });
   }

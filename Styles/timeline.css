@@ -82,7 +82,11 @@ body {
 
 .timeline-header {
     border-bottom: 1px solid black;
-    width: 70vw;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    /* width: 70vw; */
+    background-color: black;
+    color: #0f9afb;
 }
 
 .tweet-btn {
@@ -116,7 +120,7 @@ body {
     bottom: 0;
     background-color: black;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     color: #0f9afb;
 }
 
@@ -129,6 +133,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.cc-container img {
+    height: 25px;
+    width: 25px;
 }
 
 .cc-icon {
@@ -147,9 +156,106 @@ body {
     text-align: center;
     font-size: 15px;
     border: none;
-    border-bottom: 1px solid #0f9afb;
+    border-bottom: 1px solid black;
  }
+
+ .form-container {
+     display: flex;
+     /* flex-direction: column; */
+     justify-content: center;
+     align-items: center;
+     gap: 10px;
+ }
+
+.form-container button {
+    padding: 21px;
+    border: 1px solid #0f9afb;
+    text-transform: uppercase;
+}
+
+.form-container button:hover {
+    color: #0f9afb;
+    background-color: black;
+    transition: all 0.3s linear;
+}
 
 .header {
     display: none;
+}
+
+.follow-container{
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    padding: 25px;
+    color: #0f9afb;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5), 0 2px 10px 0 rgb(0, 0, 0, 0.4);
+    background-clip: padding-box;
+}
+
+.follow-container h1 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#follow-users img {
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+}
+
+#follow-users {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;   
+}
+
+.follow-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.follow-name {
+    display: flex;
+    gap: 10px;
+}
+
+.new-container {
+    display: flex;
+    /* background-color: black; */
+    padding: 20px;
+    /* border-radius: 100px; */
+    /* flex-direction: column; */
+}
+
+.trending-card {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    padding: 25px;
+    color: #0f9afb;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5), 0 2px 10px 0 rgb(0, 0, 0, 0.4);
+    background-clip: padding-box;
+}
+
+.topics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+#search {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* justify-content: center; */
+    /* align-items: center; */
 }
