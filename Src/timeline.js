@@ -1,3 +1,31 @@
+const id = window.localStorage;
+
+function getID() {
+  fetch(
+    "https://bigbirdonline.herokuapp.com/user-data/" + `${localStorage.getItem("userID")}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data)
+      // id.setItem()
+
+      let userID = data.data;
+
+      console.log(userID);
+      console.log("Successfully got User ID")
+
+      id.setItem("id", userID);
+    });
+}
+
+getID()
+
 let base_URL = "https://bigbirdonline.herokuapp.com/user-posts/" + `${ localStorage.getItem('id') }`;
 
 // view product function
@@ -29,36 +57,44 @@ function getPosts(url) {
       tweets.forEach((tweet) => {
           container.innerHTML += `
           <div class="tweet-container">
-          <div> Tweet ID ${ tweet.tweet_id } </div>
+          <div class="tweet-user">
+          <img src="${ tweet.profile_pic }">
+          ${ tweet.first_name } ${ tweet.last_name }
+          @${ tweet.username }
+          </div>
+          <div class="tweet-images"> 
           ${
-            tweet.description ? `<div><p> ${ tweet.description } </p></div>` : ''
+            tweet.description ? `<p> ${ tweet.description } </p>` : ''
         }
         ${
-          tweet.image ? `<div><img src="${ tweet.image }"class="image"></div>` : ''
+          tweet.image ? `<img src="${ tweet.image }"class="image">` : ''
         }
         ${
-          tweet.image_two ? `<div><img src="${ tweet.image_two }"class="image"></div>` : ''
+          tweet.image_two ? `<img src="${ tweet.image_two }"class="image">` : ''
         }
         ${
-          tweet.image_three ? `<div><img src="${ tweet.image_three }"class="image"></div>` : ''
+          tweet.image_three ? `<img src="${ tweet.image_three }"class="image">` : ''
         }
         ${
-          tweet.image_four ? `<div><img src="${ tweet.image_four }"class="image"></div>` : ''
+          tweet.image_four ? `<img src="${ tweet.image_four }"class="image">` : ''
         }
-        <div><p> ${ tweet.date } </p><div>
-          <button onclick="getComments(), event.preventDefault()"><i class="fas fa-comments"></i></button>
+        </div>
+        <div class="comments-date">
+        <button onclick="getComments(), event.preventDefault()"><i class="fas fa-comments"></i></button>
+        <p> ${ tweet.date } </p>
+        </div>
           </div>`
       });
   }
 
-  function getComments() {
-      fetch('https://bigbirdonline.herokuapp.com/get-comments/' + "1" + "/post/" + "2" + "/comment/" + "1", {
-          method: "GET",
-          headers: {
-              "Content-Type": "application/json"
-          }
-      }).then(res => res.json()).then(data => {
-          console.log(data)
-          console.log("Successfull")
-      })
-  }
+  // function getComments() {
+  //     fetch('https://bigbirdonline.herokuapp.com/get-comments/' + "1" + "/post/" + "2" + "/comment/" + "1", {
+  //         method: "GET",
+  //         headers: {
+  //             "Content-Type": "application/json"
+  //         }
+  //     }).then(res => res.json()).then(data => {
+  //         console.log(data)
+  //         console.log("Successfull")
+  //     })
+  // }

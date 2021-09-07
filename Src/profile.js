@@ -1,31 +1,3 @@
-const id = window.localStorage;
-
-function getID() {
-  fetch(
-    "https://bigbirdonline.herokuapp.com/user-data/" + `${localStorage.getItem("userID")}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      // console.log(data)
-      // id.setItem()
-
-      let userID = data.data;
-
-      console.log(userID);
-      console.log("Successfully got User ID")
-
-      id.setItem("id", userID);
-    });
-}
-
-getID()
-
 function userInfo() {
     fetch(
       "https://bigbirdonline.herokuapp.com/user-profile/" + `${id.getItem("id")}`,{
