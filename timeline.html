@@ -12,66 +12,100 @@
 </head>
 <body>
     <div class="container">
-        <div id="user-info">
-            <div class="timeline-image">
-                <img src="./Images/icon.ico" alt="">
-            </div>
-            <div class="nav-bar">
-                <a href="./profile.html"><i class="far fa-user-circle"></i>  Profile</a>
-                <p><i class="fab fa-wpexplorer"></i>  Explore</p>
-                <p><i class="far fa-bell"></i>  Notifications</p>
-                <p><i class="far fa-envelope"></i>  Messages</p>
-                <p><i class="far fa-bookmark"></i>  Bookmarks</p>
-                <p><i class="far fa-list-alt"></i>  Lists</p>
-            </div>
-            <div class="tweet-btn">
-                <button id="logout"><i class="fas fa-sign-out-alt"></i></button>
-                <button><i class="fas fa-plus-circle"></i></button>
-            </div>
-        </div>
-        <div class="timeline-container">
-            <div class="timeline-header">
-                <h1>HOME</h1>
-            </div>
-            <div id="timeline"></div>
-        </div>
-        <div id="search">
-            <form class="form-container">
+        <div class="timeline-header">
+            <h1>HOME</h1>
+            <form class="form-container" onsubmit="event.preventDefault(); searchUsers()">
                 <div class="form-group">
                     <label for="search" class="header">Search</label>
-                    <input type="text" placeholder="Enter your search" class="form-input">
+                    <input type="text" placeholder="Enter your search" class="form-input" id="searchInput">
                 </div>
-                <button>SEARCH</button>
+                <button type="submit">SEARCH</button>
             </form>
-            <div class="trending-card">
-                <div class="trending-header">
-                    <h2>Trends For You</h2>
+        </div>
+        <div class="timeline-container">
+            <div id="user-info">
+                <div class="timeline-image">
+                    <img src="./Images/icon.ico" alt="">
                 </div>
-                <div class="topics">
-                    <p>Sports</p>
-                    <a href="https://www.google.com/search?q=percy+tau&oq=percy+tau&aqs=chrome.0.0i355i433i512j46i433i512j0i433i512j0i512l7.1760j0j7&sourceid=chrome&ie=UTF-8" target="_blank">PERCY TAU</a>
-                    <p>20.1k tweets</p>
+                <div class="nav-bar">
+                    <a href="./profile.html"><i class="far fa-user-circle"></i>  Profile</a>
+                    <p><i class="fab fa-wpexplorer"></i>  Explore</p>
+                    <p><i class="far fa-bell"></i>  Notifications</p>
+                    <p><i class="far fa-envelope"></i>  Messages</p>
+                    <p><i class="far fa-bookmark"></i>  Bookmarks</p>
+                    <p><i class="far fa-list-alt"></i>  Lists</p>
                 </div>
-                <div class="topics">
-                    <p>Trending in South Africa</p>
-                    <a href="https://www.google.com/search?q=bafana+bafana&ei=sak3YdWrEYSw8gL2iJ2YAQ&gs_ssp=eJzj4tTP1TcwripKjjdg9OJNSkxLzEtUgFAAaYoISg&oq=baf&gs_lcp=Cgdnd3Mtd2l6EAMYADINCC4QsQMQgwEQQxCTAjIKCAAQsQMQgwEQQzIKCAAQsQMQgwEQQzIICAAQsQMQgwEyCggAELEDEIMBEEMyBAgAEEMyBwgAELEDEEMyBAgAEEMyCwgAEIAEELEDEIMBMggIABCxAxCDAToECC4QQzoHCC4QsQMQQ0oFCDgSATFKBAhBGABQyIsDWPCNA2DGngNoAHAAeACAAYoCiAGPBpIBAzItM5gBAKABAcABAQ&sclient=gws-wiz" target="_blank">BAFANA BAFANA</a>
-                    <p>10.1k tweets</p>
-                </div>
-                <div class="topics">
-                    <p>Comedy TV</p>
-                    <a href="https://www.google.com/search?q=rick+and+morty&ei=56k3YZObIZaT8gL-i4yYCA&oq=rick+and+morty&gs_lcp=Cgdnd3Mtd2l6EAMyDgguEIAEELEDEIMBEJMCMggIABCABBCxAzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDOgcILhBDEJMCOgQILhBDOgcILhCxAxBDOgQIABBDOgcIABCxAxBDOggILhCxAxCDAToFCC4QgAQ6CwguEIAEELEDEIMBOggILhCABBCxAzoKCC4QsQMQQxCTAjoFCC4QsQM6CwguELEDEJECEJMCOgUILhCRAkoECEEYAFDVjQJYrZoCYJWbAmgAcAJ4AIABygKIAeIZkgEFMi05LjOYAQCgAQHAAQE&sclient=gws-wiz&ved=0ahUKEwjTqqXiue3yAhWWiVwKHf4FA4MQ4dUDCA4&uact=5" target="_blank">RICK & MORTY</a>
-                    <p>26.2k tweets</p>
-                </div>
-                <div class="topics">
-                    <p>Trending in the UK</p>
-                    <a href="https://www.google.com/search?q=rick+and+morty&ei=56k3YZObIZaT8gL-i4yYCA&oq=rick+and+morty&gs_lcp=Cgdnd3Mtd2l6EAMyDgguEIAEELEDEIMBEJMCMggIABCABBCxAzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDOgcILhBDEJMCOgQILhBDOgcILhCxAxBDOgQIABBDOgcIABCxAxBDOggILhCxAxCDAToFCC4QgAQ6CwguEIAEELEDEIMBOggILhCABBCxAzoKCC4QsQMQQxCTAjoFCC4QsQM6CwguELEDEJECEJMCOgUILhCRAkoECEEYAFDVjQJYrZoCYJWbAmgAcAJ4AIABygKIAeIZkgEFMi05LjOYAQCgAQHAAQE&sclient=gws-wiz&ved=0ahUKEwjTqqXiue3yAhWWiVwKHf4FA4MQ4dUDCA4&uact=5" target="_blank">IDRIS ALBA</a>
-                    <p>50.5k tweets</p>
+                <div class="tweet-btn">
+                    <button id="logout"><i class="fas fa-sign-out-alt"></i></button>
+                    <button id="addBtnTimeline" onclick="addPostModalTimeline()"><i class="fas fa-plus-circle"></i></button>
                 </div>
             </div>
-            <div class="follow-container">
-                <h1>Users to follow</h1>
-                <div id="follow-users"></div>
-            </div>
+            <div id="timeline"></div>
+            <!-- The Modal -->
+            <div id="addModalTimeline" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close-timeline">X</span>
+                    <form id="newPostFormTimeline" onsubmit="event.preventDefault(), addPostTimeline()">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="userDescriptionTimeline" placeholder="Write your bio here">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" class='imginput' id="timeline-image1" onchange="addImageTimeline(1)">
+                            <img src="" alt="Image Preview" class="timeline-imgurl1">
+                        </div>
+                        <div class="form-group">
+                            <label for="image_two">Image Two</label>
+                            <input type="file" name="image_two" class='imginput' id="timeline-image2" onchange="addImageTimeline(2)">
+                            <img src="" alt="Image Preview" class="timeline-imgurl2">
+                        </div>
+                        <div class="form-group">
+                            <label for="image_three">Image Three</label>
+                            <input type="file" name="image_three" class='imginput' id="timeline-image3" onchange="addImageTimeline(3)" >
+                            <img src="" alt="Image Preview" class="timeline-imgurl3">
+                        </div>
+                        <div class="form-group">
+                            <label for="image_four">Image Four</label>
+                            <input type="file" name="image_four" class='imginput' id="timeline-image4" onchange="addImageTimeline(4)">
+                            <img src="" alt="Image Preview" class="timeline-imgurl4">
+                        </div>
+                        <button type="submit">Add Post</button>
+                        </div>
+                        </div>
+                    </form>  
+                    <div>
+                        <div class="trending-card">
+                            <div class="trending-header">
+                                <h2>Trends For You</h2>
+                            </div>
+                            <div class="topics">
+                                <p>Sports</p>
+                                <a href="https://www.google.com/search?q=percy+tau&oq=percy+tau&aqs=chrome.0.0i355i433i512j46i433i512j0i433i512j0i512l7.1760j0j7&sourceid=chrome&ie=UTF-8" target="_blank">PERCY TAU</a>
+                                <p>20.1k tweets</p>
+                            </div>
+                            <div class="topics">
+                                <p>Trending in South Africa</p>
+                                <a href="https://www.google.com/search?q=bafana+bafana&ei=sak3YdWrEYSw8gL2iJ2YAQ&gs_ssp=eJzj4tTP1TcwripKjjdg9OJNSkxLzEtUgFAAaYoISg&oq=baf&gs_lcp=Cgdnd3Mtd2l6EAMYADINCC4QsQMQgwEQQxCTAjIKCAAQsQMQgwEQQzIKCAAQsQMQgwEQQzIICAAQsQMQgwEyCggAELEDEIMBEEMyBAgAEEMyBwgAELEDEEMyBAgAEEMyCwgAEIAEELEDEIMBMggIABCxAxCDAToECC4QQzoHCC4QsQMQQ0oFCDgSATFKBAhBGABQyIsDWPCNA2DGngNoAHAAeACAAYoCiAGPBpIBAzItM5gBAKABAcABAQ&sclient=gws-wiz" target="_blank">BAFANA BAFANA</a>
+                                <p>10.1k tweets</p>
+                            </div>
+                            <div class="topics">
+                                <p>Comedy TV</p>
+                                <a href="https://www.google.com/search?q=rick+and+morty&ei=56k3YZObIZaT8gL-i4yYCA&oq=rick+and+morty&gs_lcp=Cgdnd3Mtd2l6EAMyDgguEIAEELEDEIMBEJMCMggIABCABBCxAzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDOgcILhBDEJMCOgQILhBDOgcILhCxAxBDOgQIABBDOgcIABCxAxBDOggILhCxAxCDAToFCC4QgAQ6CwguEIAEELEDEIMBOggILhCABBCxAzoKCC4QsQMQQxCTAjoFCC4QsQM6CwguELEDEJECEJMCOgUILhCRAkoECEEYAFDVjQJYrZoCYJWbAmgAcAJ4AIABygKIAeIZkgEFMi05LjOYAQCgAQHAAQE&sclient=gws-wiz&ved=0ahUKEwjTqqXiue3yAhWWiVwKHf4FA4MQ4dUDCA4&uact=5" target="_blank">RICK & MORTY</a>
+                                <p>26.2k tweets</p>
+                            </div>
+                            <div class="topics">
+                                <p>Trending in the UK</p>
+                                <a href="https://www.google.com/search?q=rick+and+morty&ei=56k3YZObIZaT8gL-i4yYCA&oq=rick+and+morty&gs_lcp=Cgdnd3Mtd2l6EAMyDgguEIAEELEDEIMBEJMCMggIABCABBCxAzILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDMgUIABCABDIICAAQsQMQgwEyCAgAEIAEELEDOgcILhBDEJMCOgQILhBDOgcILhCxAxBDOgQIABBDOgcIABCxAxBDOggILhCxAxCDAToFCC4QgAQ6CwguEIAEELEDEIMBOggILhCABBCxAzoKCC4QsQMQQxCTAjoFCC4QsQM6CwguELEDEJECEJMCOgUILhCRAkoECEEYAFDVjQJYrZoCYJWbAmgAcAJ4AIABygKIAeIZkgEFMi05LjOYAQCgAQHAAQE&sclient=gws-wiz&ved=0ahUKEwjTqqXiue3yAhWWiVwKHf4FA4MQ4dUDCA4&uact=5" target="_blank">IDRIS ALBA</a>
+                                <p>50.5k tweets</p>
+                            </div>
+                        </div>
+                        <div class="follow-container">
+                            <h1>Users to follow</h1>
+                            <div id="follow-users"></div>
+                        </div>
+                    </div>
         </div>
     </div>
     <footer class="footer">

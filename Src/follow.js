@@ -1,5 +1,8 @@
+let userSearch = []
+let addFollowers = []
+
 function allUsers() {
-    fetch('https://bigbirdonline.herokuapp.com/all-users', {
+    fetch('https://bigbirdonline.herokuapp.com/all-users/' + `${ localStorage.getItem('id') }`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -10,12 +13,17 @@ function allUsers() {
 
         let users = data.results;
 
+        addFollowers = users.followers;
+
+        console.log(addFollowers)
+
         // let following = data.results.following
         
 
         // let follower = data.results.follower
 
         renderUsers(users)
+        userSearch = users
     })
 }
 
@@ -38,17 +46,166 @@ allUsers();
 function followUser(user_id) {
     // let newFollowing = following.split()
 
-    fetch('https://bigbirdonline.herokuapp.com/' + `${ localStorage.getItem('id') }` + "/follow", {
+    let newFollow = {
+        following: user_id.toString(),
+        follower: localStorage.getItem('id')
+    }
+
+    console.log(newFollow)
+
+    fetch('https://bigbirdonline.herokuapp.com/user-profile/' + `${ localStorage.getItem('id') }` + "/follow", {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            following: user_id,
-            follower: localStorage.getItem('id')
-        })
+        body: JSON.stringify(newFollow)
     }).then(res => res.json()).then(data => {
         console.log(data)
         console.log("Successfully")
+
+        if (data['message'] == "successfully added user to followers") {
+            alert('You Successfully Followed Someone')
+            window.location.reload()
+        }
     })
 }
+
+function searchUsers() {
+    let searchTerm = document.querySelector("#searchInput").value;
+
+    console.log(searchTerm)
+
+    let searchedTerms = userSearch.filter(user => {
+        return user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    })
+    console.log(searchedTerms);
+    if (searchedTerms.length == 0) {
+        document.querySelector('#timeline').innerHTML = "<h2>No Users Fitting that Description</h2>"
+    } else {
+        renderSearchedUsers(searchTerm)
+    }
+}
+
+function renderSearchedUsers(username) {
+    fetch('https://bigbirdonline.herokuapp.com/search-profile/' + `${ username }`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => res.json()).then(data => {
+        console.log(data)
+        console.log("Successfully got profile")
+
+        let profile = data.results;
+
+        renderUserInfo(profile.user_id)
+
+        console.log(profile)
+
+        let container = document.getElementById('timeline');
+
+        console.log(container)
+
+        container.innerHTML = '';
+
+        container.innerHTML += `
+        <div class="new-container"><div class="follow-image"><img src="${ profile.profile_pic }"></div>
+        <div class="follow-content"><div class="follow-name"><div class="firstName"> ${profile.first_name}</div>
+        <div class="lastName"> ${profile.last_name}</div></div>
+        <div class="username">@${profile.username}  </div>
+        <a href="./view-user.html">PROFILE</a></div>
+        `
+    })
+}
+
+function renderUserInfo(user_id) {
+    fetch(
+      "https://bigbirdonline.herokuapp.com/user-profile/" + `${ user_id }`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+  
+        let users = data.results;
+
+        let following = data.results.following
+
+        let newFollowing = following.split(",")
+
+        let followers = data.results.follower
+  
+        console.log(users);
+  
+        let container = document.querySelector("#view-user");
+  
+        container.innerHTML = "";
+  
+        container.innerHTML += `<div class="container">
+        <img src="${ users.profile_pic }">
+        <div class="username"><h3>username</h3> @${users.username}  </div>
+        <div class="firstName"><h3>First Name:</h3> ${users.first_name}</div>
+        <div class="lastName"><h3>Last Name:</h3> ${users.last_name}</div>
+        <div><h3>Bio</h3> ${ users.bio }</div>
+        ${
+          (newFollowing.length == 0) ? `<div><h3>Following</h3>0</div>` : `<div><h3>Following</h3> ${ newFollowing.length }</div>`
+        }
+        ${
+          (users.follower === 'null') ? `<div><h3>Followers</h3> ${ users.follower }</div>` : `<div><h3>Followers</h3>0</div>`
+        }
+        <button id="userBtn" id="profileSettings" onclick="editUserModal()">Edit Profile</button>
+        <button onclick="deleteUser()">Delete Profile</button>
+        <button id="addBtn" onclick="addPostModal()">Add Post</button>
+        <hr>
+        </div>
+        <div id="deleteUser" class="modal">
+        <!-- Modal content -->
+        <div class="modalContent">
+            <span class="done"></span>
+            <form onsubmit="event.preventDefault(); editUser(); addImage(); ">
+                <h3>Edit Profile</h3>
+               <div class="form-group">
+                   <label for="first_name">First Name</label>
+                   <input type="text" class="form-input" name="first_name" id="firstName" placeholder="John">
+               </div>
+               <div class="form-group">
+                   <label for="last_name">Last Name</label>
+                   <input type="text" class="form-input" name="last_name" id="lastName" placeholder="Doe">
+               </div>
+               <div class="form-group">
+                   <label for="email">email</label>
+                   <input type="text" class="form-input" name="email" id="userEmail" placeholder="example@mail.com">
+               </div>
+               <div class="form-group">
+                   <label for="cell_num">cell number</label>
+                   <input type="text" class="form-input" name="cell_num" id="number" placeholder="083 555 1676">
+               </div>
+               <div class="form-group">
+                   <label for="password">password</label>
+                   <input type="text" class="form-input" name="password" id="userPass" placeholder="************">
+               </div>
+               <div class="form-group">
+                   <label for="profile_pic">Profile Picture</label>
+                   <input type="file" class="form-input imgurl" name="profile_pic" id="pp" onchange="addImagePP()">
+                   <img src="" alt="Image Preview" class="ppURL">
+               </div>
+               <div class="form-group">
+                   <label for="bio">Bio</label>
+                   <input type="text" class="form-input" name="bio" id="bio" placeholder="Your Bio">
+               </div>
+               <div class="form-group">
+                   <label for="username">Username</label>
+                   <input type="text" name="username" id="userUsername" placeholder="@getwrecked" class="form-input">
+               </div>
+               <button type="submit">EDIT</button>
+            </form>
+        </div>
+        </div>
+    </div>
+        `;
+      });
+  }

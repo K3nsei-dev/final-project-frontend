@@ -1,3 +1,29 @@
+const id = window.localStorage;
+
+function getID() {
+  fetch(
+    "https://bigbirdonline.herokuapp.com/user-data/" + `${localStorage.getItem("userID")}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data)
+      // id.setItem()
+
+      let userID = data.data;
+
+      console.log(userID);
+      console.log("Successfully got User ID")
+
+      id.setItem("id", userID);
+    });
+}
+
 function userInfo() {
     fetch(
       "https://bigbirdonline.herokuapp.com/user-profile/" + `${id.getItem("id")}`,{
@@ -18,19 +44,6 @@ function userInfo() {
         let newFollowing = following.split(",")
 
         let followers = data.results.follower
-
-        // let newFollower = followers.split(',')
-
-        // newFollowing.length
-
-        // console.log(newFollowing.length)
-
-        // let following = users.following;
-
-        // following.split()
-
-        // console.log(following)
-        // userInfo(following)
   
         console.log(users);
   
@@ -100,7 +113,6 @@ function userInfo() {
         </div>
     </div>
         `;
-        // document.querySelectorAll('.imginput').forEach(input => input.addEventListener('change', addImage))
       });
   }
 
@@ -227,10 +239,13 @@ function userInfo() {
 
 function addPost() {
   const postDescription = document.getElementById("userDescription").value;
-  const imageOne = document.querySelector('.imgurl1').src;
-  const imageTwo = document.querySelector('.imgurl2').src;
-  const imageThree = document.querySelector('.imgurl3').src;
-  const imageFour = document.querySelector('.imgurl4').src;
+  let postForm = document.querySelector('#newPostForm')
+  const imgs = postForm.querySelectorAll('img')
+  console.log(imgs)
+  const imageOne = imgs[0].src;
+  const imageTwo = imgs[1].src;
+  const imageThree = imgs[2].src;
+  const imageFour = imgs[3].src;
 
   let post = {
     user_id: localStorage.getItem('id'),
@@ -260,7 +275,7 @@ function addPost() {
       console.log(data)
       console.log("Successfull")
 
-      if (data['message'] == "You successfully added a post") {
+      if (data['message'] == "Successfully added a post") {
           alert('You Successfully Added A Post!')
           window.location.reload()
       }
@@ -270,7 +285,7 @@ function addPost() {
 function addImage(option) {
   // console.log(1)
   // let option = e.target.id[4]
-  const preview = document.querySelector('img');
+  const preview = document.querySelector(`.imgurl${ option }`);
   const file = document.querySelector(`#image${option}`).files[0];
   console.log(file)
   console.log(preview)
