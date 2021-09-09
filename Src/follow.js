@@ -13,16 +13,13 @@ function allUsers() {
 
         let users = data.results;
 
-        addFollowers = users.followers;
+        console.log(users   )
+
+        addFollowers = data.results.following;
 
         console.log(addFollowers)
 
-        // let following = data.results.following
-        
-
-        // let follower = data.results.follower
-
-        renderUsers(users)
+        renderUsers(users, addFollowers)
         userSearch = users
     })
 }
@@ -37,28 +34,49 @@ function renderUsers(users) {
         <div class="follow-content"><div class="follow-name"><div class="firstName"> ${user.first_name}</div>
         <div class="lastName"> ${user.last_name}</div></div>
         <div class="username">@${user.username}  </div>
-        <button type="submit" id="followBtn-${ user.user_id }" onclick="followUser(${ user.user_id })">FOLLOW</button></div>`
+        <button type="button" id="followBtn-${ user.user_id }" onclick="followUser(${ user.user_id }, ${ user.follower })">FOLLOW</button></div>`
     });
 }
 
 allUsers();
 
-function followUser(user_id) {
-    // let newFollowing = following.split()
+function followUser(user_id, follower) {
+    let newFollowing = localStorage.getItem('following')
+    
+    let userFollower = follower
 
-    let newFollow = {
-        following: user_id.toString(),
-        follower: localStorage.getItem('id')
+    let arrayOfFollowing
+    let arrayOfFollower
+    if (newFollowing.length >= 1) {
+        arrayOfFollowing = Array.from(newFollowing)
+        arrayOfFollower = Array.from(userFollower)
+    } else {
+        arrayOfFollowing = newFollowing.split(",")
+        arrayOfFollower = arrayOfFollower.split(",")
     }
 
-    console.log(newFollow)
+    console.log(arrayOfFollowing)
+    // let newFollow
+    if (arrayOfFollowing == null || arrayOfFollower == null) {
+        arrayOfFollowing = {
+            following: user_id.toString(),
+            follower: localStorage.getItem('id').toString()
+        }
+    } else {
+        arrayOfFollowing = {
+            following: arrayOfFollowing.push(user_id).toString(),
+            follower: arrayOfFollower.push(localStorage.getItem('id')).toString()
+        }
+    }
+
+    console.log(arrayOfFollowing)
 
     fetch('https://bigbirdonline.herokuapp.com/user-profile/' + `${ localStorage.getItem('id') }` + "/follow", {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(newFollow)
+        body: JSON.stringify(arrayOfFollowing)
     }).then(res => res.json()).then(data => {
         console.log(data)
         console.log("Successfully")
@@ -210,3 +228,21 @@ function renderUserInfo(user_id) {
         `;
       });
   }
+
+  function getUserFollowing() {
+      fetch('https://bigbirdonline.herokuapp.com/get-following/' + `${ localStorage.getItem('id') }`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json"
+          }
+      })
+      .then(res => res.json())
+      .then(data => {
+          console.log(data)
+          console.log("Successfully got user followers")
+          let followingList = data.results.following;
+          localStorage.setItem('following', followingList)
+      })
+  }
+
+  getUserFollowing()
