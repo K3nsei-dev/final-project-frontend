@@ -47,12 +47,7 @@ function getPosts(url) {
 
   function renderPosts(tweets) {
       let container = document.querySelector('#timeline');
-
       container.innerHTML = "";
-
-      let tweetID = tweets.tweetID;
-
-      console.log(tweetID)
 
       tweets.forEach((tweet) => {
           container.innerHTML += `
