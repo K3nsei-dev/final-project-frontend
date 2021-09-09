@@ -7,8 +7,9 @@
 
 body {
     /* height: 100vh; */
-    background-color: #0f9afb;
+    background-color: black;
     font-family: Arial, Helvetica, sans-serif;
+    color: #0f9afb;
 }
 
 .nav-bar {
@@ -31,7 +32,7 @@ body {
 
 .nav-bar a {
     text-decoration: none;
-    color: black;
+    color: #0f9afb;
     flex-wrap: nowrap;
     display: flex;
     justify-content: flex-start;
@@ -66,27 +67,36 @@ body {
     display: flex;
     flex-direction: column;
     width: 50%;
+    overflow-y: scroll;
+    overflow: hidden;
+    gap: 20px;
 }
 
 .tweet-container {
-    /* min-height: 100vh; */
-    /* width: 50vw; */
-    /* padding: 50px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
-    /* flex-direction: row; */
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+    background-color: black;
+    color: black;
+    box-shadow: 0 2px 5px 0 rgb(0, 162, 255, 0.5), 0 2px 10px 0 rgb(0, 162, 255, 0.4);
+    background-clip: padding-box;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 #user-info {
     height: 100vh;
     padding: 30px;
+    /* border-right: 1px solid #0f9afb; */
+    position: absolute;
+    left: 0;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
 }
 
 #search {
@@ -131,12 +141,12 @@ body {
     /* font-size: 30px; */
     padding: 20px;
     border: none;
-    background: none;
+    background-color: #0f9afb;
 }
 
 .tweet-btn button:hover {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: #0f9afb;
     transition: all 0.3s linear;
 }
 
@@ -185,7 +195,7 @@ body {
     text-align: center;
     font-size: 15px;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #0f9afb;
  }
 
  .form-container {
@@ -216,10 +226,10 @@ body {
     gap: 20px;
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: #0f9afb;
     padding: 25px;
-    color: #0f9afb;
-    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5), 0 2px 10px 0 rgb(0, 0, 0, 0.4);
+    color: black;
+    box-shadow: 0 2px 5px 0 rgba(0, 162, 255, 0.411), 0 2px 10px 0 rgb(0, 162, 255, 0.411 0.4);
     background-clip: padding-box;
 }
 
@@ -266,10 +276,10 @@ body {
     gap: 20px;
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: #0f9afb;
     padding: 25px;
-    color: #0f9afb;
-    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5), 0 2px 10px 0 rgb(0, 0, 0, 0.4);
+    color: black;
+    box-shadow: 0 2px 5px 0 rgb(0, 162, 255, 0.5), 0 2px 10px 0 rgb(0, 162, 255, 0.4);
     background-clip: padding-box;
 }
 
@@ -333,3 +343,54 @@ body {
     text-decoration: none;
     cursor: pointer;
   }
+
+  .tweet-user {
+      display: flex;
+      border-bottom: 3px solid black;
+      width: 100%;
+      gap: 20px;
+  }
+
+  .tweet-user img {
+      height: 75px;
+      width: 75px;
+      border-radius: 75px;
+  }
+
+  .info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tweet-images {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-bottom: 3px solid black;
+}
+
+#trending-container {
+    /* border-left: 1px solid #0f9afb; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    width: 25%;
+}
+
+.topics p {
+    font-weight: bold;
+}
+
+.topics a {
+    text-decoration: none;
+    flex-wrap: nowrap;
+    color: black;
+}
