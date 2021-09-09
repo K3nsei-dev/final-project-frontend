@@ -59,14 +59,15 @@ function getPosts(url) {
           <div class="tweet-container">
           <div class="tweet-user">
           <img src="${ tweet.profile_pic }">
-          ${ tweet.first_name } ${ tweet.last_name }
-          @${ tweet.username }
+          <div class="info">
+          <div>${ tweet.first_name } ${ tweet.last_name }</div>
+          <div>@${ tweet.username }</div></div>
           </div>
           <div class="tweet-images"> 
           ${
             tweet.description ? `<p> ${ tweet.description } </p>` : ''
         }
-        ${
+        <div>${
           tweet.image ? `<img src="${ tweet.image }"class="image">` : ''
         }
         ${
@@ -77,11 +78,11 @@ function getPosts(url) {
         }
         ${
           tweet.image_four ? `<img src="${ tweet.image_four }"class="image">` : ''
-        }
+        }</div>
+        <p> ${ tweet.date } </p>
         </div>
         <div class="comments-date">
         <button onclick="getComments(${ tweet.user_id }, ${ tweet.tweet_id   }), event.preventDefault()"><i class="fas fa-comments"></i></button>
-        <p> ${ tweet.date } </p>
         </div>
           </div>`
       });

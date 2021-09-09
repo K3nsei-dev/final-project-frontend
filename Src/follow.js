@@ -65,6 +65,7 @@ function followUser(user_id) {
 
         if (data['message'] == "successfully added user to followers") {
             alert('You Successfully Followed Someone')
+            renderPosts(user_id)
             window.location.reload()
         }
     })
