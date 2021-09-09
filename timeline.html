@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline</title>
+    <link rel="shortcut icon" href="./Images/icon.ico" type="image" />
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/3285114a98.js" crossorigin="anonymous"></script>
     <!-- My CSS -->
@@ -37,7 +38,7 @@
                 </div>
                 <div class="tweet-btn">
                     <button id="logout"><i class="fas fa-sign-out-alt"></i></button>
-                    <button id="addBtnTimeline" onclick="addPostModalTimeline()"><i class="fas fa-plus-circle"></i></button>
+                    <button id="addBtnTimeline" onclick="addPostModalTimeline()"><i class="fas fa-folder-plus"></i></button>
                 </div>
             </div>
             <div id="timeline"></div>
@@ -48,27 +49,27 @@
                     <span class="close-timeline">X</span>
                     <form id="newPostFormTimeline" onsubmit="event.preventDefault(), addPostTimeline()">
                         <div class="form-group">
-                            <label for="description">Description</label>
-                            <input type="text" name="description" id="userDescriptionTimeline" placeholder="Write your bio here">
+                            <label for="description" class="header">Description</label>
+                            <input type="text" name="description" id="userDescriptionTimeline" placeholder="Write your bio here" class="form-input">
                         </div>
                         <div class="form-group">
-                            <label for="image">Image</label>
-                            <input type="file" name="image" class='imginput' id="timeline-image1" onchange="addImageTimeline(1)">
+                            <label for="image" class="header">Image</label>
+                            <input type="file" name="image" class='imginput' id="timeline-image1" onchange="addImageTimeline(1)" class="form-input">
                             <img src="" alt="Image Preview" class="timeline-imgurl1">
                         </div>
                         <div class="form-group">
-                            <label for="image_two">Image Two</label>
-                            <input type="file" name="image_two" class='imginput' id="timeline-image2" onchange="addImageTimeline(2)">
+                            <label for="image_two" class="header">Image Two</label>
+                            <input type="file" name="image_two" class='imginput' id="timeline-image2" onchange="addImageTimeline(2)" class="form-input">
                             <img src="" alt="Image Preview" class="timeline-imgurl2">
                         </div>
                         <div class="form-group">
-                            <label for="image_three">Image Three</label>
-                            <input type="file" name="image_three" class='imginput' id="timeline-image3" onchange="addImageTimeline(3)" >
+                            <label for="image_three" class="header">Image Three</label>
+                            <input type="file" name="image_three" class='imginput' id="timeline-image3" onchange="addImageTimeline(3)" class="form-input">
                             <img src="" alt="Image Preview" class="timeline-imgurl3">
                         </div>
                         <div class="form-group">
-                            <label for="image_four">Image Four</label>
-                            <input type="file" name="image_four" class='imginput' id="timeline-image4" onchange="addImageTimeline(4)">
+                            <label for="image_four" class="header">Image Four</label>
+                            <input type="file" name="image_four" class='imginput' id="timeline-image4" onchange="addImageTimeline(4)" class="form-input">
                             <img src="" alt="Image Preview" class="timeline-imgurl4">
                         </div>
                         <button type="submit">Add Post</button>

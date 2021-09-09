@@ -13,9 +13,8 @@ function getID() {
     .then((res) => res.json())
     .then((data) => {
       // console.log(data)
-      // id.setItem()
 
-      let userID = data.data;
+      let userID = data.results;
 
       console.log(userID);
       console.log("Successfully got User ID")
@@ -53,31 +52,32 @@ function getPosts(url) {
           container.innerHTML += `
           <div class="tweet-container">
           <div class="tweet-user">
-          <img src="${ tweet.profile_pic }">
-          <div class="info">
-          <div>${ tweet.first_name } ${ tweet.last_name }</div>
-          <div>@${ tweet.username }</div></div>
+          <div class="user-picture"><img src="${ tweet.profile_pic }"></div>
+          <div class="user-name"><p>${ tweet.first_name } ${ tweet.last_name }</p>
+          <p>@${ tweet.username }</p></div>
           </div>
           <div class="tweet-images"> 
           ${
             tweet.description ? `<p> ${ tweet.description } </p>` : ''
         }
-        <div>${
+        <div class="image-container-one">${
           tweet.image ? `<img src="${ tweet.image }"class="image">` : ''
         }
         ${
           tweet.image_two ? `<img src="${ tweet.image_two }"class="image">` : ''
-        }
-        ${
+        }</div>
+        <div class="image-container-two">${
           tweet.image_three ? `<img src="${ tweet.image_three }"class="image">` : ''
         }
         ${
           tweet.image_four ? `<img src="${ tweet.image_four }"class="image">` : ''
         }</div>
-        <p> ${ tweet.date } </p>
         </div>
         <div class="comments-date">
         <button onclick="getComments(${ tweet.user_id }, ${ tweet.tweet_id   }), event.preventDefault()"><i class="fas fa-comments"></i></button>
+        <button><i class="fas fa-retweet"></i></button>
+        <button><i class="far fa-heart fas"></i></button>
+        <p> ${ tweet.date } </p>
         </div>
           </div>`
       });
@@ -161,7 +161,7 @@ function getPosts(url) {
         console.log(data)
         console.log("Successfull")
   
-        if (data['message'] == "Successfully added a post") {
+        if (data['message'] == 'Successfully added a post') {
             alert('You Successfully Added A Post!')
             window.location.reload()
         }

@@ -83,8 +83,8 @@ function followUser(user_id, follower) {
 
         if (data['message'] == "successfully added user to followers") {
             alert('You Successfully Followed Someone')
-            renderPosts(user_id)
-            window.location.reload()
+            // window.location.reload()
+            renderFollowedUsers(user_id)
         }
     })
 }
@@ -246,3 +246,53 @@ function renderUserInfo(user_id) {
   }
 
   getUserFollowing()
+
+  function renderFollowedUsers(user_id) {
+    fetch('https://bigbirdonline.herokuapp.com/all-posts/' + `${ user_id }`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        console.log("Successfull")
+
+        let followingUser = data;
+
+        let container = document.getElementById('timeline')
+
+        container.innerHTML += container.innerHTML += `
+        <div class="tweet-container">
+        <div class="tweet-user">
+        <div class="user-picture"><img src="${ followingUser.profile_pic }"></div>
+        <div class="user-name"><p>${ tweet.first_name } ${ followingUser.last_name }</p>
+        <p>@${ followingUser.username }</p></div>
+        </div>
+        <div class="tweet-images"> 
+        ${
+          followingUser.description ? `<p> ${ followingUser.description } </p>` : ''
+      }
+      <div class="image-container-one">${
+        followingUser.image ? `<img src="${ followingUser.image }"class="image">` : ''
+      }
+      ${
+        followingUser.image_two ? `<img src="${ followingUser.image_two }"class="image">` : ''
+      }</div>
+      <div class="image-container-two">${
+        followingUser.image_three ? `<img src="${ followingUser.image_three }"class="image">` : ''
+      }
+      ${
+        followingUser.image_four ? `<img src="${ followingUser.image_four }"class="image">` : ''
+      }</div>
+      </div>
+      <div class="comments-date">
+      <button onclick="getComments(${ followingUser.user_id }, ${ followingUser.tweet_id   }), event.preventDefault()"><i class="fas fa-comments"></i></button>
+      <p> ${ followingUser.date } </p>
+      </div>
+        </div>`
+
+        console.log(followingUser);
+    });
+  }
