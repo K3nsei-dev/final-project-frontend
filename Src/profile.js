@@ -12,10 +12,9 @@ function getID() {
   )
     .then((res) => res.json())
     .then((data) => {
-      // console.log(data)
-      // id.setItem()
+      console.log(data)
 
-      let userID = data.data;
+      let userID = data.results;
 
       console.log(userID);
       console.log("Successfully got User ID")
@@ -41,7 +40,13 @@ function userInfo() {
 
         let following = data.results.following
 
-        let newFollowing = following.split(",")
+        let newFollowing;
+
+        if (newFollowing == null) {
+          newFollowing.length == 0
+        } else {
+          newFollowing = following.split(",")
+        } 
 
         let followers = data.results.follower
   
@@ -61,7 +66,7 @@ function userInfo() {
           (newFollowing.length == 0) ? `<div><h3>Following</h3>0</div>` : `<div><h3>Following</h3> ${ newFollowing.length }</div>`
         }
         ${
-          (users.follower === 'null') ? `<div><h3>Followers</h3> ${ users.follower }</div>` : `<div><h3>Followers</h3>0</div>`
+          (followers === 'null') ? `<div><h3>Followers</h3> ${ followers }</div>` : `<div><h3>Followers</h3>0</div>`
         }
         <button id="userBtn" id="profileSettings" onclick="editUserModal()">Edit Profile</button>
         <button onclick="deleteUser()">Delete Profile</button>
@@ -204,7 +209,8 @@ function userInfo() {
     const userEmail =document.getElementById('userEmail').value;
     const number = document.getElementById('number').value;
     const userPass = document.getElementById('userPass').value;
-    const pp = document.querySelector('.ppURL').src;
+    let editForm = document.getElementById('newPostForm');
+    const pp = editForm.querySelector('img').src;
     const userBio = document.getElementById('bio').value;
     const userUsername = document.getElementById('userUsername').value;
 
@@ -283,16 +289,12 @@ function addPost() {
 }
 
 function addImage(option) {
-  // console.log(1)
-  // let option = e.target.id[4]
   const preview = document.querySelector(`.imgurl${ option }`);
   const file = document.querySelector(`#image${option}`).files[0];
   console.log(file)
   console.log(preview)
 
   const reader = new FileReader();
-
-  // console.log(preview, file)
 
   reader.addEventListener("load", function () {
       preview.src = reader.result;

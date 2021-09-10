@@ -14,14 +14,14 @@
 <body>
     <div class="container">
         <div class="timeline-header">
-            <h1>HOME</h1>
-            <form class="form-container" onsubmit="event.preventDefault(); searchUsers()">
-                <div class="form-group">
-                    <label for="search" class="header">Search</label>
-                    <input type="text" placeholder="Enter your search" class="form-input" id="searchInput">
+            <div class="cc-container">
+                <div class="cc-icon">
+                    <h1>Big Bird Online</h1>
+                    <button><i class="far fa-moon"></i></button>
                 </div>
-                <button type="submit">SEARCH</button>
-            </form>
+                <!-- <div class="toggle-mode"> -->
+                </div>
+            </div>
         </div>
         <div class="timeline-container">
             <div id="user-info">
@@ -41,7 +41,12 @@
                     <button id="addBtnTimeline" onclick="addPostModalTimeline()"><i class="fas fa-folder-plus"></i></button>
                 </div>
             </div>
-            <div id="timeline"></div>
+            <div class="timeline-home-container">
+                <div class="timeline-home-header">
+                    <h1>Home</h1>
+                </div>
+                <div id="timeline"></div>
+            </div>
             <!-- The Modal -->
             <div id="addModalTimeline" class="modal">
                 <!-- Modal content -->
@@ -55,28 +60,37 @@
                         <div class="form-group">
                             <label for="image" class="header">Image</label>
                             <input type="file" name="image" class='imginput' id="timeline-image1" onchange="addImageTimeline(1)" class="form-input">
-                            <img src="" alt="Image Preview" class="timeline-imgurl1">
+                            <img src="" alt="Image Preview" class="timeline-imgurl1" height="150">
                         </div>
                         <div class="form-group">
                             <label for="image_two" class="header">Image Two</label>
                             <input type="file" name="image_two" class='imginput' id="timeline-image2" onchange="addImageTimeline(2)" class="form-input">
-                            <img src="" alt="Image Preview" class="timeline-imgurl2">
+                            <img src="" alt="Image Preview" class="timeline-imgurl2" height="150">
                         </div>
                         <div class="form-group">
                             <label for="image_three" class="header">Image Three</label>
                             <input type="file" name="image_three" class='imginput' id="timeline-image3" onchange="addImageTimeline(3)" class="form-input">
-                            <img src="" alt="Image Preview" class="timeline-imgurl3">
+                            <img src="" alt="Image Preview" class="timeline-imgurl3" height="150">
                         </div>
                         <div class="form-group">
                             <label for="image_four" class="header">Image Four</label>
                             <input type="file" name="image_four" class='imginput' id="timeline-image4" onchange="addImageTimeline(4)" class="form-input">
-                            <img src="" alt="Image Preview" class="timeline-imgurl4">
+                            <img src="" alt="Image Preview" class="timeline-imgurl4" height="150">
                         </div>
                         <button type="submit">Add Post</button>
                         </div>
                         </div>
                     </form>  
                     <div id="trending-container">
+                        <div class="search-from">
+                            <form class="form-container" onsubmit="event.preventDefault(); searchUsers()">
+                                <div class="form-group">
+                                    <label for="search" class="header">Search</label>
+                                    <input type="text" placeholder="Enter your search" class="form-input" id="searchInput">
+                                </div>
+                                <button type="submit">SEARCH</button>
+                            </form>
+                        </div>
                         <div class="trending-card">
                             <div class="trending-header">
                                 <h2>Trends For You</h2>
@@ -106,18 +120,19 @@
                             <h1>Users to follow</h1>
                             <div id="follow-users"></div>
                         </div>
+                        <div id="viewUser">
+                            <!-- The Modal -->
+                            <div id="myModalUser" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                <span class="closeProfile">X</span>
+                                <p>Some text in the Modal..</p>
+                            </div>
+                            </div>
+                        </div>
                     </div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="cc-container">
-            <div class="cc-icon">
-                <a href=""><i class="far fa-copyright"></i></a>
-                <p>Big Bird Online</p>
-            </div>
-            <!-- <img src="./Images/icon.ico" alt=""> -->
-        </div>
-    </footer>
     <script src="./Src/timeline.js"></script>
     <script src="./Src/logout.js"></script>
     <script src="./Src/follow.js"></script>

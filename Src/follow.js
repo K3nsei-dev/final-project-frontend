@@ -13,7 +13,7 @@ function allUsers() {
 
         let users = data.results;
 
-        console.log(users   )
+        console.log(users)
 
         addFollowers = data.results.following;
 
@@ -34,58 +34,55 @@ function renderUsers(users) {
         <div class="follow-content"><div class="follow-name"><div class="firstName"> ${user.first_name}</div>
         <div class="lastName"> ${user.last_name}</div></div>
         <div class="username">@${user.username}  </div>
-        <button type="button" id="followBtn-${ user.user_id }" onclick="followUser(${ user.user_id }, ${ user.follower })">FOLLOW</button></div>`
+        <button type="button" id="followBtn-${ user.user_id }">FOLLOW</button></div>`
     });
 }
 
+// onclick="followUser(${ user.user_id })"
+
 allUsers();
 
-function followUser(user_id, follower) {
-    let newFollowing = localStorage.getItem('following')
-    
-    let userFollower = follower
+function followUser(user_id) {
+    fetch(`https://bigbirdonline.herokuapp.com/${localStorage.getItem("id")}`)
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        let me = res.results
 
-    let arrayOfFollowing
-    let arrayOfFollower
-    if (newFollowing.length >= 1) {
-        arrayOfFollowing = Array.from(newFollowing)
-        arrayOfFollower = Array.from(userFollower)
-    } else {
-        arrayOfFollowing = newFollowing.split(",")
-        arrayOfFollower = arrayOfFollower.split(",")
-    }
+        me.following ? me.following += `,${ user_id }` : `${user_id}`
 
-    console.log(arrayOfFollowing)
-    // let newFollow
-    if (arrayOfFollowing == null || arrayOfFollower == null) {
-        arrayOfFollowing = {
-            following: user_id.toString(),
-            follower: localStorage.getItem('id').toString()
-        }
-    } else {
-        arrayOfFollowing = {
-            following: arrayOfFollowing.push(user_id).toString(),
-            follower: arrayOfFollower.push(localStorage.getItem('id')).toString()
-        }
-    }
+        fetch(`https://bigbirdonline.herokuapp.com/${localStorage.getItem("id")}`,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(me)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    })
 
-    console.log(arrayOfFollowing)
+    fetch(`https://bigbirdonline.herokuapp.com/${user_id}`)
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        let user = res.results
 
-    fetch('https://bigbirdonline.herokuapp.com/user-profile/' + `${ localStorage.getItem('id') }` + "/follow", {
-        method: 'PATCH',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(arrayOfFollowing)
-    }).then(res => res.json()).then(data => {
-        console.log(data)
-        console.log("Successfully")
+        user.followers ? user.followers += `,${ localStorage.getItem("id") }` : `${localStorage.getItem("id")}`
 
-        if (data['message'] == "successfully added user to followers") {
-            alert('You Successfully Followed Someone')
-            // window.location.reload()
-            renderFollowedUsers(user_id)
-        }
+        fetch(`http://127.0.0.1:5000/edit-user/${user_id}`,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
     })
 }
 
@@ -132,7 +129,7 @@ function renderSearchedUsers(username) {
         <div class="follow-content"><div class="follow-name"><div class="firstName"> ${profile.first_name}</div>
         <div class="lastName"> ${profile.last_name}</div></div>
         <div class="username">@${profile.username}  </div>
-        <a href="./view-user.html">PROFILE</a></div>
+        <button onclick="viewProfile()">PROFILE</button></div>
         `
     })
 }
@@ -156,7 +153,7 @@ function renderUserInfo(user_id) {
 
         let newFollowing = following.split(",")
 
-        let followers = data.results.follower
+        // let followers = data.results.follower
   
         console.log(users);
   
@@ -295,4 +292,32 @@ function renderUserInfo(user_id) {
 
         console.log(followingUser);
     });
+  }
+
+  function viewProfile() {
+    // Get the modal
+    let modal = document.getElementById("myModalUser");
+
+    // Get the button that opens the modal
+    let btn = document.getElementById("addBtn");
+
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("closeProfile")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+    modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+  }
+}
   }

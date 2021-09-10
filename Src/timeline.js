@@ -2,24 +2,22 @@ const id = window.localStorage;
 
 function getID() {
   fetch(
-    "https://bigbirdonline.herokuapp.com/user-data/" + `${localStorage.getItem("userID")}`,
-    {
+    "https://bigbirdonline.herokuapp.com/user-data/" + `${ localStorage.getItem('userID') }`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
-    }
-  )
+    })
     .then((res) => res.json())
     .then((data) => {
-      // console.log(data)
+      console.log(data)
 
-      let userID = data.results;
+      let userID = data.results.user_id;
 
       console.log(userID);
       console.log("Successfully got User ID")
 
-      id.setItem("id", userID);
+      id.setItem('id', userID);
     });
 }
 
@@ -74,10 +72,10 @@ function getPosts(url) {
         }</div>
         </div>
         <div class="comments-date">
-        <button onclick="getComments(${ tweet.user_id }, ${ tweet.tweet_id   }), event.preventDefault()"><i class="fas fa-comments"></i></button>
+        <div><button onclick="getComments(${ tweet.user_id }, ${ tweet.tweet_id   }), event.preventDefault()"><i class="fas fa-comments"></i></button>
         <button><i class="fas fa-retweet"></i></button>
-        <button><i class="far fa-heart fas"></i></button>
-        <p> ${ tweet.date } </p>
+        <button><i class="far fa-heart fas"></i></button></div>
+        <div><p> ${ tweet.date } </p></div>
         </div>
           </div>`
       });

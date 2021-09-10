@@ -5,7 +5,8 @@ async function registerUser() {
     const cell = document.getElementById("cell_num").value;
     const password = document.getElementById("password").value;
     const id = document.getElementById("id").value;
-    const pic = document.getElementById("pp").src;
+    const postForm = document.getElementById('register')
+    const pic = postForm.querySelector("img").src;
     const usernameInput = document.getElementById("username").value;
     const bioInput = document.getElementById("bio-input").value;
 
@@ -52,7 +53,8 @@ async function registerUser() {
   }
 
   function addImage() {
-    const preview = document.querySelector('.imgurl');
+    const postForm = document.getElementById('register')
+    const preview = postForm.querySelector('img');
     const file = document.querySelector('input[type=file]').files[0];
     const reader = new FileReader();
 
