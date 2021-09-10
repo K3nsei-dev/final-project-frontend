@@ -34,7 +34,7 @@ function renderUsers(users) {
         <div class="follow-content"><div class="follow-name"><div class="firstName"> ${user.first_name}</div>
         <div class="lastName"> ${user.last_name}</div></div>
         <div class="username">@${user.username}  </div>
-        <button type="button" id="followBtn-${ user.user_id }">FOLLOW</button></div>`
+        <div><button type="button" id="followBtn-${ user.user_id }" onclick="followUser(${ user.user_id })">FOLLOW</button></div></div>`
     });
 }
 
@@ -43,7 +43,7 @@ function renderUsers(users) {
 allUsers();
 
 function followUser(user_id) {
-    fetch(`https://bigbirdonline.herokuapp.com/${localStorage.getItem("id")}`)
+    fetch(`https://bigbirdonline.herokuapp.com/user-profile/${localStorage.getItem("id")}`)
     .then(res => res.json())
     .then(res => {
         console.log(res)
@@ -51,7 +51,7 @@ function followUser(user_id) {
 
         me.following ? me.following += `,${ user_id }` : `${user_id}`
 
-        fetch(`https://bigbirdonline.herokuapp.com/${localStorage.getItem("id")}`,{
+        fetch(`https://bigbirdonline.herokuapp.com/edit-user/${localStorage.getItem("id")}`,{
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -64,7 +64,7 @@ function followUser(user_id) {
         })
     })
 
-    fetch(`https://bigbirdonline.herokuapp.com/${user_id}`)
+    fetch(`https://bigbirdonline.herokuapp.com/user-profile/${user_id}`)
     .then(res => res.json())
     .then(res => {
         console.log(res)
@@ -72,7 +72,7 @@ function followUser(user_id) {
 
         user.followers ? user.followers += `,${ localStorage.getItem("id") }` : `${localStorage.getItem("id")}`
 
-        fetch(`http://127.0.0.1:5000/edit-user/${user_id}`,{
+        fetch(`https://bigbirdonline.herokuapp.com/edit-user/${user_id}`,{
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -82,6 +82,11 @@ function followUser(user_id) {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+
+            if (data['message'] == "You successfully updated the user"){
+                alert("You successfully followed someone")
+                window.location.reload()
+            }
         })
     })
 }
@@ -129,7 +134,7 @@ function renderSearchedUsers(username) {
         <div class="follow-content"><div class="follow-name"><div class="firstName"> ${profile.first_name}</div>
         <div class="lastName"> ${profile.last_name}</div></div>
         <div class="username">@${profile.username}  </div>
-        <button onclick="viewProfile()">PROFILE</button></div>
+        <button onclick="followUser(${profile.user_id})">FOLLOW</button></div>
         `
     })
 }
@@ -292,32 +297,4 @@ function renderUserInfo(user_id) {
 
         console.log(followingUser);
     });
-  }
-
-  function viewProfile() {
-    // Get the modal
-    let modal = document.getElementById("myModalUser");
-
-    // Get the button that opens the modal
-    let btn = document.getElementById("addBtn");
-
-    // Get the <span> element that closes the modal
-    let span = document.getElementsByClassName("closeProfile")[0];
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-    modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-    modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-  }
-}
   }

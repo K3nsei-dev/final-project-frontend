@@ -11,13 +11,20 @@ async function registerUser() {
     const bioInput = document.getElementById("bio-input").value;
 
   
-    // if (
-    //   typeof(name) === "number" ||
-    //   typeof(surname) === "number"){
-    //   return alert(`Please use the correct values for each section!`);
-    // }
+    if (
+      name == "" ||
+      surname == "" ||
+      email == "" ||
+      cell == "" ||
+      password == "" ||
+      id == "" || 
+      pic == "http://127.0.0.1:5500/timeline.html" ||
+      usernameInput == "" || 
+      bioInput == ""){
+      return alert(`Please Fill in the form correctly!`);
+    }
       
-    // console.log(name, surname, email, cell, password)
+    console.log(name, surname, email, cell, password)
     try {
       const res = await fetch(
         "https://bigbirdonline.herokuapp.com/register",

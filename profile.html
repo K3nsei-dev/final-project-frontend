@@ -5,49 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="shortcut icon" href="./Images/icon.ico" type="image" />
     <!-- font awesome plugin -->
     <script src="https://kit.fontawesome.com/3285114a98.js" crossorigin="anonymous"></script>
     <!-- My CSS-->
     <link rel="stylesheet" href="./Styles/profile.css">
+    <!-- <link rel="stylesheet" href="./Styles/timeline.css"> -->
 </head>
 <body>
-    <div class="user-container"></div>
-    <div class="user-posts"></div>
-            <!-- The Modal -->
-            <div id="addModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close"></span>
-                    <form id="newPostForm" onsubmit="event.preventDefault(), addPost()">
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <input type="text" name="description" id="userDescription" placeholder="Write your bio here">
+    <div class="page-container">
+    <div class="container">
+        <div class="profile-heading">
+            <h1>BIG BIRD ONLINE</h1>
+            <button id="logout"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+        <div class="logout">
+        </div>
+        </div>
+        <div class="profile-container">
+            <div class="posts-container">
+                <div class="user-info">
+                    <div class="timeline-image">
+                        <img src="./Images/icon.ico" alt="">
+                    </div>
+                    <div class="tweet-btn">
+                        <div class="nav-bar">
+                            <a href="./timeline.html"><i class="far fa-user-circle"></i>  Timeline</a>
+                            <p><i class="fab fa-wpexplorer"></i>  Explore</p>
+                            <p><i class="far fa-bell"></i>  Notifications</p>
+                            <p><i class="far fa-envelope"></i>  Messages</p>
+                            <p><i class="far fa-bookmark"></i>  Bookmarks</p>
+                            <p><i class="far fa-list-alt"></i>  Lists</p>
                         </div>
-                        <div class="form-group">
-                            <label for="image">Image</label>
-                            <input type="file" name="image" class='imginput' id="image1" onchange="addImage(1)">
-                            <img src="" alt="Image Preview" class="imgurl1">
-                        </div>
-                        <div class="form-group">
-                            <label for="image_two">Image Two</label>
-                            <input type="file" name="image_two" class='imginput' id="image2" onchange="addImage(2)">
-                            <img src="" alt="Image Preview" class="imgurl2">
-                        </div>
-                        <div class="form-group">
-                            <label for="image_three">Image Three</label>
-                            <input type="file" name="image_three" class='imginput' id="image3" onchange="addImage(3)" >
-                            <img src="" alt="Image Preview" class="imgurl3">
-                        </div>
-                        <div class="form-group">
-                            <label for="image_four">Image Four</label>
-                            <input type="file" name="image_four" class='imginput' id="image4" onchange="addImage(4)">
-                            <img src="" alt="Image Preview" class="imgurl4">
-                        </div>
-                        <button type="submit">Add Post</button>
-                        </div>
-                        </div>
+                    </div>
+                </div>
+            <div class="user-container">
+                <div class="user-container"></div>
+            </div>
+            <div class="timeline-home-header">
+                <h1>TIMELINE</h1>
+            </div>
+            <div class="user-posts"></div>
+            </div>       
+    </div>
+</div>
+    <script src="./Src/logout.js"></script>
     <script src="./Src/profile.js"></script>
     <script src="./Src/view-tweets.js"></script>
-    <!-- <script src="./Src/logout.js"></script> -->
 </body>
 </html>

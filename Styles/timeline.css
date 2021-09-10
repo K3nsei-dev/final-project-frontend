@@ -55,8 +55,28 @@ body {
 }
 
 .tweet-container img {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
+}
+
+#follow-users button,
+.new-container button {
+    padding: 21px;
+    border: 1px solid black;
+    text-transform: uppercase;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+#follow-users button:hover,
+.new-container button:hover {
+    border: 1px solid #0f9afb;
+    background-color: #0f9afb;
+    color: black;
+    text-transform: uppercase;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s linear;
 }
 
 .comments-date:not(p) {
@@ -328,6 +348,26 @@ body {
     gap: 20px;
 }
 
+#newPostFormTimeline button {
+    padding: 21px;
+    border: 1px solid #0f9afb;
+    text-transform: uppercase;
+    /* border-radius: 50px; */
+    font-weight: bold;
+    background-color: #0f9afb;
+
+}
+
+#newPostFormTimeline button:hover {
+    border: 1px solid black;
+    text-transform: uppercase;
+    /* border-radius: 50px; */
+    font-weight: bold;
+    background-color: black;
+    color: #0f9afb;
+    transition: all 0.3s linear;
+}
+
 .trending-card {
     gap: 20px;
     display: flex;
@@ -483,8 +523,8 @@ body {
 }
 
 .image-container img {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
 }
 
 #trending-container {
@@ -519,13 +559,26 @@ body {
     width: 100px;;
 }
 
-/* #viewUser {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.4);
-    display: grid;
-    place-items: center;
-} */
+.like-btns {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    /* border-bottom: 3px solid #0f9afb; */
+    /* min-width: 100%; */
+}
+
+.like-btns button {
+    background-color: black;
+    border: 1px solid black;
+    color: #0f9afb;
+}
+
+.date {
+    display: flex;
+    color: #0f9afb;
+    font-size: 20px;
+    font-weight: bold;
+    justify-content: flex-start;
+    text-align: start;
+}

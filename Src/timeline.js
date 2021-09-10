@@ -32,9 +32,8 @@ function getPosts(url) {
       .then((data) => {
         console.log(data);
   
-        // console.log(cartProduct);
-  
         tweets = data.results;
+        console.log(tweets)
   
         renderPosts(tweets);
       });
@@ -59,24 +58,24 @@ function getPosts(url) {
             tweet.description ? `<p> ${ tweet.description } </p>` : ''
         }
         <div class="image-container-one">${
-          tweet.image ? `<img src="${ tweet.image }"class="image">` : ''
+          (tweet.image || tweet.image == "https://http://127.0.0.1:5500/timeline.html") ? `<img src="${ tweet.image }"class="image">` : ''
         }
         ${
-          tweet.image_two ? `<img src="${ tweet.image_two }"class="image">` : ''
+          (tweet.image_two || tweet.image_two == "https://http://127.0.0.1:5500/timeline.html") ? `<img src="${ tweet.image_two }"class="image">` : ''
         }</div>
         <div class="image-container-two">${
-          tweet.image_three ? `<img src="${ tweet.image_three }"class="image">` : ''
+          (tweet.image_three || tweet.image_three == "https://http://127.0.0.1:5500/timeline.html") ? `<img src="${ tweet.image_three }"class="image">` : ''
         }
         ${
-          tweet.image_four ? `<img src="${ tweet.image_four }"class="image">` : ''
+          (tweet.image_four || tweet.image_four == "https://http://127.0.0.1:5500/timeline.html") ? `<img src="${ tweet.image_four }"class="image">` : ''
         }</div>
         </div>
         <div class="comments-date">
-        <div><button onclick="getComments(${ tweet.user_id }, ${ tweet.tweet_id   }), event.preventDefault()"><i class="fas fa-comments"></i></button>
+        <div class="like-btns"><button onclick="getComments(${ tweet.user_id }, ${ tweet.tweet_id   }), event.preventDefault()"><i class="fas fa-comments"></i></button>
         <button><i class="fas fa-retweet"></i></button>
         <button><i class="far fa-heart fas"></i></button></div>
-        <div><p> ${ tweet.date } </p></div>
         </div>
+        <div class="date"><p> ${ tweet.date } </p></div>
           </div>`
       });
   }
@@ -122,6 +121,7 @@ function getPosts(url) {
   }
 
   function addPostTimeline() {
+
     const postDescription = document.getElementById("userDescriptionTimeline").value;
     let postForm = document.querySelector('#newPostFormTimeline')
     const imgs = postForm.querySelectorAll('img')
@@ -130,6 +130,7 @@ function getPosts(url) {
     const imageTwo = imgs[1].src;
     const imageThree = imgs[2].src;
     const imageFour = imgs[3].src;
+
   
     let post = {
       user_id: localStorage.getItem('id'),
@@ -141,29 +142,26 @@ function getPosts(url) {
   }
   
     console.log(post, imageOne)
-  
-    fetch('https://bigbirdonline.herokuapp.com/add-post/' + `${localStorage.getItem('id')}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            user_id: localStorage.getItem('id'),
-            description: postDescription,
-            image: imageOne,
-            image_two: imageTwo,
-            image_three: imageThree,
-            image_four: imageFour
-        })
-    }).then(res => res.json()).then(data => {
-        console.log(data)
-        console.log("Successfull")
-  
-        if (data['message'] == 'Successfully added a post') {
-            alert('You Successfully Added A Post!')
-            window.location.reload()
-        }
-    })
+
+    if (postDescription == '' || imgs == 'http://127.0.0.1:5500/timeline.html'){
+      return alert("Please fill in at least one section")
+    } else {
+      fetch('https://bigbirdonline.herokuapp.com/add-post/' + `${localStorage.getItem('id')}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(post)
+      }).then(res => res.json()).then(data => {
+          console.log(data)
+          console.log("Successfull")
+    
+          if (data['message'] == 'Successfully added a post') {
+              alert('You Successfully Added A Post!')
+              window.location.reload()
+          }
+      })
+    }
   }
   
   function addImageTimeline(option) {

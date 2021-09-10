@@ -28,26 +28,29 @@ function getPosts(url) {
 
       tweets.forEach((tweet) => {
           container.innerHTML += `<div class="tweet-container">
-          <div> Tweet ID ${ tweet.tweet_id } </div>
+          <div class="tweet-user">
+          <div class="user-picture"><img src="${ tweet.profile_pic }"></div>
+          <div class="user-name"><p>${ tweet.first_name } ${ tweet.last_name }</p>
+          <p>@${ tweet.username }</p></div>
+          </div>
         ${
-            tweet.description ? `<div><p> ${ tweet.description } </p></div>` : ''
+            tweet.description ? `<div class="text"><p> ${ tweet.description } </p></div>` : ''
+        }
+        <div class="image-container"><div class="tweet-image-container-one">${
+          tweet.image ? `<div class="image"><img src="${ tweet.image }"></div>` : ''
         }
         ${
-          tweet.image ? `<div><img src="${ tweet.image }"class="image"></div>` : ''
+          tweet.image_two ? `<div class="image"><img src="${ tweet.image_two }"></div>` : ''
+        }</div>
+        <div class="tweet-image-container-two">${
+          tweet.image_three ? `<div class="image"><img src="${ tweet.image_three }"></div>` : ''
         }
         ${
-          tweet.image_two ? `<div><img src="${ tweet.image_two }"class="image"></div>` : ''
-        }
-        ${
-          tweet.image_three ? `<div><img src="${ tweet.image_three }"class="image"></div>` : ''
-        }
-        ${
-          tweet.image_four ? `<div><img src="${ tweet.image_four }"class="image"></div>` : ''
-        }
-          <button onclick="editModal(${ tweet.tweet_id }), addImage()" id="edit-button-${ tweet.tweet_id }">EDIT<button>
-          <button onclick="deletePost(${ tweet.tweet_id })" id="delete-btn-${ tweet.tweet_id }">DELETE</button>
-          <div><div><p> ${ tweet.date } </p></div><div>
-          <hr>
+          tweet.image_four ? `<div class="image"><img src="${ tweet.image_four }"></div>` : ''
+        }</div></div>
+          <div class="view-btn-container"><div class="view-btn"><button onclick="editModal(${ tweet.tweet_id })" id="edit-button-${ tweet.tweet_id }">EDIT</button></div>
+          <div class="view-btn-two"><button onclick="deletePost(${ tweet.tweet_id })" id="delete-btn-${ tweet.tweet_id }">DELETE</button></div></div>
+          <div><p> ${ tweet.date } </p></div>
           </div>
           <!-- The Modal -->
           <div id="editModal-${ tweet.tweet_id }" class="modal">
@@ -61,19 +64,19 @@ function getPosts(url) {
                   </div>
                   <div class="form-group">
                       <label for="image">Image</label>
-                      <input type="file" name="image" id="imageOne-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
+                      <input type="file" name="image" id="imageOne-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
                   </div>
                   <div class="form-group">
                       <label for="image_two">Image</label>
-                      <input type="file" name="image_two" id="imageTwo-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
+                      <input type="file" name="image_two" id="imageTwo-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
                   </div>
                   <div class="form-group">
                       <label for="image_three">Image</label>
-                      <input type="file" name="image_three" id="imageThree-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
+                      <input type="file" name="image_three" id="imageThree-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
                   </div>
                   <div class="form-group">
                       <label for="image_four">Image</label>
-                      <input type="file" name="image_four" id="imageFour-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage()">
+                      <input type="file" name="image_four" id="imageFour-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
                   </div>
                   <button type="submit" id="editBtn-${ tweet.tweet_id }">EDIT</button>
               </form>

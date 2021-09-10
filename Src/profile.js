@@ -42,7 +42,7 @@ function userInfo() {
 
         let newFollowing;
 
-        if (newFollowing == null) {
+        if (users.following == null) {
           newFollowing.length == 0
         } else {
           newFollowing = following.split(",")
@@ -56,65 +56,22 @@ function userInfo() {
   
         container.innerHTML = "";
   
-        container.innerHTML += `<div class="container">
-        <img src="${ users.profile_pic }">
-        <div class="username"><h3>username</h3> @${users.username}  </div>
-        <div class="firstName"><h3>First Name:</h3> ${users.first_name}</div>
-        <div class="lastName"><h3>Last Name:</h3> ${users.last_name}</div>
-        <div><h3>Bio</h3> ${ users.bio }</div>
-        ${
-          (newFollowing.length == 0) ? `<div><h3>Following</h3>0</div>` : `<div><h3>Following</h3> ${ newFollowing.length }</div>`
+        container.innerHTML += `<div class="JScontainer">
+        <div class="bigContainer">
+        <div class="profile-image"><img src="${ users.profile_pic }"></div>
+        <div class="userNamesContainer">
+        <div class="userNames">${users.first_name} ${users.last_name}</div>
+        @${users.username}</div>
+        </div>
+        <div class="bio"><h2>${ users.bio }</h2></div>
+        <div class="following">${
+          (newFollowing.length == 0) ? `<div class="followCount"><h3>Following</h3>0</div>` : `<div class="followCount"><h3>Following</h3> ${ newFollowing.length }</div>`
         }
         ${
-          (followers === 'null') ? `<div><h3>Followers</h3> ${ followers }</div>` : `<div><h3>Followers</h3>0</div>`
-        }
+          (followers === 'null') ? `<div class="followCount"><h3>Followers</h3> ${ followers }</div>` : `<div class="followCount"><h3>Followers</h3>0</div>`
+        }</div>
         <button id="userBtn" id="profileSettings" onclick="editUserModal()">Edit Profile</button>
         <button onclick="deleteUser()">Delete Profile</button>
-        <button id="addBtn" onclick="addPostModal()">Add Post</button>
-        <hr>
-        </div>
-        <div id="deleteUser" class="modal">
-        <!-- Modal content -->
-        <div class="modalContent">
-            <span class="done"></span>
-            <form onsubmit="event.preventDefault(); editUser(); addImage(); ">
-                <h3>Edit Profile</h3>
-               <div class="form-group">
-                   <label for="first_name">First Name</label>
-                   <input type="text" class="form-input" name="first_name" id="firstName" placeholder="John">
-               </div>
-               <div class="form-group">
-                   <label for="last_name">Last Name</label>
-                   <input type="text" class="form-input" name="last_name" id="lastName" placeholder="Doe">
-               </div>
-               <div class="form-group">
-                   <label for="email">email</label>
-                   <input type="text" class="form-input" name="email" id="userEmail" placeholder="example@mail.com">
-               </div>
-               <div class="form-group">
-                   <label for="cell_num">cell number</label>
-                   <input type="text" class="form-input" name="cell_num" id="number" placeholder="083 555 1676">
-               </div>
-               <div class="form-group">
-                   <label for="password">password</label>
-                   <input type="text" class="form-input" name="password" id="userPass" placeholder="************">
-               </div>
-               <div class="form-group">
-                   <label for="profile_pic">Profile Picture</label>
-                   <input type="file" class="form-input imgurl" name="profile_pic" id="pp" onchange="addImagePP()">
-                   <img src="" alt="Image Preview" class="ppURL">
-               </div>
-               <div class="form-group">
-                   <label for="bio">Bio</label>
-                   <input type="text" class="form-input" name="bio" id="bio" placeholder="Your Bio">
-               </div>
-               <div class="form-group">
-                   <label for="username">Username</label>
-                   <input type="text" name="username" id="userUsername" placeholder="@getwrecked" class="form-input">
-               </div>
-               <button type="submit">EDIT</button>
-            </form>
-        </div>
         </div>
     </div>
         `;
