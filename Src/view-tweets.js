@@ -57,7 +57,7 @@ function getPosts(url) {
           <!-- Modal content -->
           <div class="modal-content">
               <span class="close-${ tweet.tweet_id }"></span>
-              <form onsubmit="event.preventDefault(), editPost(${ tweet.tweet_id })">
+              <form onsubmit="event.preventDefault(), editPost(${ tweet.tweet_id })" id="profileForm">
                   <div class="form-group">
                       <label for="description">Description</label>
                       <input type="text" name="description" id="userDescription-${ tweet.tweet_id }" placeholder="Write your bio here">
@@ -65,18 +65,22 @@ function getPosts(url) {
                   <div class="form-group">
                       <label for="image">Image</label>
                       <input type="file" name="image" id="imageOne-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
+                      <img src="" alt="Image Preview" class="profile-imgurl1" height="150">
                   </div>
                   <div class="form-group">
                       <label for="image_two">Image</label>
                       <input type="file" name="image_two" id="imageTwo-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
+                      <img src="" alt="Image Preview" class="profile-imgurl1" height="150">
                   </div>
                   <div class="form-group">
                       <label for="image_three">Image</label>
                       <input type="file" name="image_three" id="imageThree-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
+                      <img src="" alt="Image Preview" class="profile-imgurl1" height="150">
                   </div>
                   <div class="form-group">
                       <label for="image_four">Image</label>
                       <input type="file" name="image_four" id="imageFour-${ tweet.tweet_id }" class="imgurl-${ tweet.tweet_id }" onchange="addImage(${ tweet.tweet_id })">
+                      <img src="" alt="Image Preview" class="profile-imgurl1" height="150">
                   </div>
                   <button type="submit" id="editBtn-${ tweet.tweet_id }">EDIT</button>
               </form>
@@ -115,10 +119,13 @@ function getPosts(url) {
 
   function editPost(tweet_id) {
       const postDescription = document.getElementById(`userDescription-${ tweet_id }`).value;
-      const imageOne = document.querySelector(`#imageOne-${ tweet_id }`).src;
-      const imageTwo = document.querySelector(`#imageTwo-${ tweet_id }`).src;
-      const imageThree = document.querySelector(`#imageThree-${ tweet_id }`).src;
-      const imageFour = document.querySelector(`#imageFour-${ tweet_id }`).src;
+      const postForm = document.getElementById('profileForm')
+      const imgs = postForm.querySelectorAll('img')
+      console.log(imgs)
+      const imageOne = imgs[0].src;
+      const imageTwo = imgs[1].src;
+      const imageThree = imgs[2].src;
+      const imageFour = imgs[3].src;
 
        post = {
         tweet_id: tweet_id,
@@ -150,7 +157,7 @@ function getPosts(url) {
 
           if (data['message'] == "You updated the post successfully") {
               alert('You Successfully Edited Your Post!')
-            //   window.location.reload()   
+              window.location.reload()   
           }
       })
   }
@@ -177,3 +184,20 @@ function deletePost(tweet_id) {
         })
     }
 }
+
+function addImage(option) {
+    const preview = document.querySelector(`.profile-imgurl${ option }`);
+    const file = document.querySelector(`#image${option}`).files[0];
+    console.log(file)
+    console.log(preview)
+  
+    const reader = new FileReader();
+  
+    reader.addEventListener("load", function () {
+        preview.src = reader.result;
+    }, false);
+  
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+  }

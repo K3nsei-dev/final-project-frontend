@@ -80,18 +80,6 @@ function getPosts(url) {
       });
   }
 
-  // function getComments() {
-  //     fetch('https://bigbirdonline.herokuapp.com/get-comments/' + "1" + "/post/" + "2" + "/comment/" + "1", {
-  //         method: "GET",
-  //         headers: {
-  //             "Content-Type": "application/json"
-  //         }
-  //     }).then(res => res.json()).then(data => {
-  //         console.log(data)
-  //         console.log("Successfull")
-  //     })
-  // }
-
   function addPostModalTimeline() {
     // Get the modal
     let modal = document.getElementById("addModalTimeline");

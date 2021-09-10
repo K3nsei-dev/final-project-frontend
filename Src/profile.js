@@ -246,7 +246,7 @@ function addPost() {
 }
 
 function addImage(option) {
-  const preview = document.querySelector(`.imgurl${ option }`);
+  const preview = document.querySelector('img');
   const file = document.querySelector(`#image${option}`).files[0];
   console.log(file)
   console.log(preview)
